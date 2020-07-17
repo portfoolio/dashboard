@@ -1,0 +1,11 @@
+table, th, td {
+  text-align: center !important;
+}
+
+table > thead th {
+  border: 1px solid #eaeaea !important;
+}
+
+table td {
+  border: 1px solid #eaeaea !important;
+}
