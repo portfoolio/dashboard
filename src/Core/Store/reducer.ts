@@ -1,21 +1,9 @@
 import { ActionType } from './types';
-import socketIOClient from 'socket.io-client';
-import { WS_URL } from '../../../config';
 
 const initialState: any = {
   notifications: [],
   showLoader: false,
   notification: [],
-  socket: socketIOClient(WS_URL, {
-    transports: [
-      'websocket',
-      'flashsocket',
-      'htmlfile',
-      'xhr-polling',
-      'jsonp-polling',
-      'polling',
-    ],
-  }),
 };
 
 export default (

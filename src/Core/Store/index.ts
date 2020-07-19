@@ -1,5 +1,5 @@
 import { createStore, applyMiddleware, compose, ReducersMapObject } from 'redux';
-import { combineEpics } from 'redux-observable';
+import { combineEpics, createEpicMiddleware } from 'redux-observable';
 import { throttle, camelCase } from 'lodash';
 import storage from '../util/storage';
 import { combineReducers } from 'redux';
@@ -17,7 +17,6 @@ reducerContext.keys().map((key: string) => {
 });
 
 epicContext.keys().map((key: string) => {
-  // @ts-ignore
   Object.keys(epicContext(key).default).map(k => epics.push(epicContext(key).default[k]));
   return key;
 });

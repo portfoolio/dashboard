@@ -1,6 +1,6 @@
 import React from 'react';
 import { Helmet } from 'react-helmet';
-import { APP_NAME } from '../config';
+import { APP_NAME } from 'config';
 
 export default (Component: any, { title }: { title: string }) => {
   return (props: []) => {

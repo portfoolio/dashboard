@@ -8,7 +8,7 @@ const Padding = styled.div`
   padding-bottom: ${gridSize() * 3}px;
 `;
 
-export default ({ children, medium = 0 }) => (
+export default ({ children, medium = 0 }: any) => (
   <Grid layout="fluid">
     {medium > 0 && <GridColumn medium={(12 - medium) / 2}/>}
     <GridColumn medium={medium}>
