@@ -1,5 +1,5 @@
 import axios from 'axios';
-import store from 'store/index';
+import store from 'store';
 import { ActionType } from 'Core/Store/types';
 import { ActionType as AuthActionTypes } from 'Auth/Store/types';
 

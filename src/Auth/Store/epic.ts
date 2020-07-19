@@ -3,11 +3,7 @@ import { ActionsObservable, ofType, StateObservable } from 'redux-observable';
 import { concat, from, of } from 'rxjs';
 import { ServiceInterface } from 'Core/util/Service';
 import { ActionType } from './types';
-import {
-  loginFailed,
-  loginSuccessfully,
-} from './actions';
-import { Auth } from 'medium/api';
+import { loginFailed, loginSuccessfully, } from './actions';
 
 const authLogin = (
   action$: ActionsObservable<any>,
@@ -17,7 +13,7 @@ const authLogin = (
   return action$.pipe(
     ofType(ActionType.LOGIN),
     mergeMap(({ data: { email, password } }) => {
-      return from(Service.request({ endpoint: '/', path: '/', method: 'POST' }, {}, { email, password })).pipe(
+      return from(Service.request({ path: '/', method: 'POST' }, {}, { email, password })).pipe(
         mergeMap((response: any) => {
             return concat(
               of(

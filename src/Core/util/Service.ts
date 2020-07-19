@@ -1,12 +1,5 @@
 import axios from './axios';
-import store from 'store/index';
-
-enum RequestMethod {
-  POST = 'POST',
-  GET = 'GET',
-  PUT = 'PUT',
-  DELETE = 'DELETE',
-}
+import store from 'store';
 
 interface RequestQuery {
   [key: string]: string;
@@ -18,7 +11,7 @@ interface RequestData {
 
 interface Endpoint {
   path: string;
-  method: RequestMethod;
+  method: any;
 }
 
 export interface ServiceInterface {

@@ -94,7 +94,7 @@ class Table extends Component<any, any> {
     let counter = 0;
     const allowedKeys = _.map(this.props.head.cells, 'key');
 
-    const tableRows = rows.map((data: TableRowDataDefinition): TableRow => {
+    return rows.map((data: TableRowDataDefinition): TableRow => {
       const id: string = data.id;
       let cells: TableCell[] = [];
 
@@ -152,8 +152,6 @@ class Table extends Component<any, any> {
         cells: orderedCells,
       };
     });
-
-    return tableRows;
   }
 
   render(): ReactNode {

@@ -4,12 +4,11 @@ import {
   LayoutManager,
   NavigationProvider,
   ThemeProvider,
-  settings,
+  modeGenerator,
 } from '@atlaskit/navigation-next';
 import GlobalSidebar from './GlobalSidebar';
 import ContainerNavigation from './ContainerNavigation';
 import Notification from '../../Notification';
-import WebPushBanner from '../WebPush';
 
 class Sidebar extends Component<any, any> {
   static defaultProps = {
@@ -32,20 +31,23 @@ class Sidebar extends Component<any, any> {
   render() {
     return (
       <NavigationProvider>
-        <ThemeProvider theme={(theme: any) => ({ ...theme, mode: settings })}>
-          <WebPushBanner setOffset={(value: any) => this.setOffset(value)} />
+        <ThemeProvider theme={(theme: any) => ({
+          ...theme, mode: modeGenerator({
+            product: { text: '#FEFEEE', background: '#469EEF' },
+          })
+        })}>
           <LayoutManager
             globalNavigation={GlobalSidebar}
             productNavigation={
-              () => <ContainerNavigation navLinks={this.props.navLinks} />
+              () => <ContainerNavigation {...this.props.navLinks} />
             }
             topOffset={this.state.offset}
           >
-            <div css={{ padding: '32px 40px' }}>
+            <div style={{ padding: '32px 40px' }}>
               {this.props.children}
             </div>
           </LayoutManager>
-          <Notification />
+          <Notification/>
         </ThemeProvider>
       </NavigationProvider>
     );

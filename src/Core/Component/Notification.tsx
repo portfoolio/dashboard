@@ -1,10 +1,9 @@
-/* tslint:disable */
 import React, { Component } from 'react';
 import { colors } from '@atlaskit/theme';
 import SuccessIcon from '@atlaskit/icon/glyph/check-circle';
 import { AutoDismissFlag, FlagGroup } from '@atlaskit/flag';
 import { connect } from 'react-redux';
-import { ActionType } from './../Store/types';
+import { ActionType } from 'Core/Store/types';
 
 class Notification extends Component<any, any> {
   state = {

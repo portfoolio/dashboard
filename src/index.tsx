@@ -3,7 +3,7 @@ import ReactDOM from 'react-dom';
 import { Provider } from 'react-redux';
 
 import store from './store';
-import Router from 'Core/Router';
+import Router from './router';
 
 // eslint-disable-next-line no-undef
 ReactDOM.render(

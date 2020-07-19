@@ -3,7 +3,7 @@ import { withRouter } from 'react-router-dom';
 import PageHeader from '@atlaskit/page-header';
 import { BreadcrumbsStateless, BreadcrumbsItem } from '@atlaskit/breadcrumbs';
 
-class Title extends Component {
+class Title extends Component<any, any> {
   static defaultProps = {
     breadcrumbs: [],
   };
@@ -14,11 +14,11 @@ class Title extends Component {
         this.props.breadcrumbs.length > 0 &&
         <BreadcrumbsStateless onExpand={() => {}}>
           {
-            this.props.breadcrumbs.map(({ title, route }, i) => (
+            this.props.breadcrumbs.map(({ title, route }: any, i: number) => (
               <BreadcrumbsItem
                 text={title}
                 href={route}
-                onClick={e => {
+                onClick={(e: any) => {
                   e.preventDefault();
                   this.props.history.push(route);
                 }}
