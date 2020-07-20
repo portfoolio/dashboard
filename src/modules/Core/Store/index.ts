@@ -8,11 +8,10 @@ import Service from 'util/Service';
 let reducers: ReducersMapObject<any, any> = {};
 let epics: any = [];
 
-const reducerContext = require.context('./modules', true, /Store\/reducer\.ts$/);
-const epicContext = require.context('./modules', true, /Store\/epic\.ts$/);
+const reducerContext = require.context('../', true, /Store\/reducer\.ts$/);
+const epicContext = require.context('../', true, /Store\/epic\.ts$/);
 reducerContext.keys().map((key: string) => {
-  let moduleName = (key.substring(key.lastIndexOf('./') + 2, key.lastIndexOf('/Store'))).toLowerCase()
-
+  let moduleName = (key.substring(key.lastIndexOf('./') + 2, key.lastIndexOf('/Store'))).toLowerCase();
   reducers[camelCase(moduleName)] = reducerContext(key).default;
   return key;
 });
@@ -37,9 +36,7 @@ const store: any = createStore(
 
 store.subscribe(throttle(() => {
   const { auth } = store.getState();
-  storage.saveState({
-    auth,
-  });
+  storage.saveState({ auth });
 }, 1000));
 
 epicMiddleware.run(combineEpics.apply({}, epics));
