@@ -6,7 +6,8 @@
     "start": "react-scripts --max_old_space_size=8000 start",
     "build": "react-scripts --max_old_space_size=8000 build",
     "test": "react-scripts test --env=jsdom",
-    "eject": "react-scripts eject"
+    "eject": "react-scripts eject",
+    "lint": "eslint '*/**/*.{js,ts,tsx}' --quiet --fix"
   },
   "keywords": [],
   "author": "Atlassian",
@@ -47,6 +48,7 @@
     "@types/redux-thunk": "^2.1.0",
     "@types/webpack-env": "^1.15.0",
     "axios": "^0.19.2",
+    "eslint-plugin-react": "^7.20.3",
     "lodash": "^4.17.19",
     "moment": "^2.27.0",
     "prop-types": "^15.6.0",
@@ -65,10 +67,19 @@
     "typescript": "^3.9.7"
   },
   "devDependencies": {
+    "@typescript-eslint/eslint-plugin": "^3.6.1",
+    "@typescript-eslint/parser": "^3.6.1",
     "babel-cli": "^6.26.0",
     "babel-preset-env": "^1.7.0",
     "babel-preset-stage-0": "^6.24.1",
+    "eslint": "^7.5.0",
+    "eslint-config-prettier": "^6.11.0",
+    "eslint-plugin-import": "^2.22.0",
+    "eslint-plugin-prettier": "^3.1.4",
+    "husky": "^4.2.5",
+    "lint-staged": "^10.2.11",
     "nodemon": "^2.0.1",
+    "prettier": "^2.0.5",
     "react-scripts": "^3.3.0",
     "surge": "^0.20.1",
     "tslint": "^5.20.1",
@@ -84,6 +95,16 @@
       "last 1 chrome version",
       "last 1 firefox version",
       "last 1 safari version"
+    ]
+  },
+  "husky": {
+    "hooks": {
+      "pre-commit": "lint-staged"
+    }
+  },
+  "lint-staged": {
+    "*.{js,ts,tsx}": [
+      "eslint --fix"
     ]
   }
 }
