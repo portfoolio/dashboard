@@ -1,11 +1,9 @@
-import React, { PureComponent } from 'react';
+import React, { FunctionComponent } from 'react';
 import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 
-class Toast extends PureComponent<any, any> {
-  render() {
-    return <ToastContainer />;
-  }
-}
+const Toast: FunctionComponent<any> = () => {
+  return <ToastContainer />;
+};
 
 export default Toast;

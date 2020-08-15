@@ -1,37 +1,42 @@
-import React, { Component } from 'react';
+import React, { FunctionComponent } from 'react';
+import PropTypes from 'prop-types';
 import { withRouter } from 'react-router-dom';
 import PageHeader from '@atlaskit/page-header';
 import { BreadcrumbsStateless, BreadcrumbsItem } from '@atlaskit/breadcrumbs';
 
-class Title extends Component<any, any> {
-  static defaultProps = {
-    breadcrumbs: [],
-  };
-
-  render() {
-    return (
-      <PageHeader breadcrumbs={
-        this.props.breadcrumbs.length > 0 &&
-        <BreadcrumbsStateless onExpand={() => {}}>
-          {
-            this.props.breadcrumbs.map(({ title, route }: any, i: number) => (
+const Title: FunctionComponent<any> = (props) => {
+  return (
+    <PageHeader
+      breadcrumbs={
+        props.breadcrumbs.length > 0 && (
+          // eslint-disable-next-line @typescript-eslint/no-empty-function
+          <BreadcrumbsStateless onExpand={() => {}}>
+            {props.breadcrumbs.map(({ title, route }: any, i: number) => (
               <BreadcrumbsItem
                 text={title}
                 href={route}
                 onClick={(e: any) => {
                   e.preventDefault();
-                  this.props.history.push(route);
+                  props.history.push(route);
                 }}
                 key={i}
               />
-            ))
-          }
-        </BreadcrumbsStateless>
-      }>
-        {this.props.children}
-      </PageHeader>
-    );
-  };
-}
+            ))}
+          </BreadcrumbsStateless>
+        )
+      }
+    >
+      {props.children}
+    </PageHeader>
+  );
+};
+
+Title.propTypes = {
+  breadcrumbs: PropTypes.array,
+};
+
+Title.defaultProps = {
+  breadcrumbs: [],
+};
 
 export default withRouter(Title);
