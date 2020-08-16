@@ -1,8 +1,11 @@
 import { ActionType } from 'modules/Auth/Store/types';
 
 const initialState: any = {
-  isAuthenticated: true,
-  user: null,
+  isAuthenticated: false,
+  user: {
+    firstName: '',
+    lastName: '',
+  },
   token: '',
 };
 

@@ -1,4 +1,4 @@
-import React, { Fragment } from 'react';
+import React from 'react';
 import {
   HeaderSection,
   MenuSection,
@@ -18,16 +18,19 @@ import EditorBoldIcon from '@atlaskit/icon/glyph/editor/bold';
 import EmailIcon from '@atlaskit/icon/glyph/email';
 import BoardIcon from '@atlaskit/icon/glyph/board';
 import StarFilledIcon from '@atlaskit/icon/glyph/star-filled';
-import CreditcardIcon from '@atlaskit/icon/glyph/creditcard';
+import CreditCardIcon from '@atlaskit/icon/glyph/creditcard';
 import ArrowUpIcon from '@atlaskit/icon/glyph/arrow-up';
 import SettingsIcon from '@atlaskit/icon/glyph/settings';
+
+import { Route as HeaderRoutes } from 'modules/Header/Router/types';
+import { uuid4 } from 'util/helper';
 
 const SidebarItem = styled.div`
   margin-top: 5px;
 `;
 
 const ContainerNavigation = () => (
-  <Fragment>
+  <>
     <HeaderSection>
       {
         ({ css }: { css: object }) => (
@@ -50,13 +53,13 @@ const ContainerNavigation = () => (
 
           <Separator/>
           <GroupHeading>Site</GroupHeading>
-          <Link to={'/'} key={'/'} style={{ textDecoration: 'none' }}>
+          <Link to={HeaderRoutes.HEADER} key={HeaderRoutes.HEADER} style={{ textDecoration: 'none' }}>
             <NavigationItem
               before={EditorHorizontalRuleIcon} text={'Header'} subText={'Site header'}
             />
           </Link>
           <SidebarItem>
-            <Link to={'/'} key={'/'} style={{ textDecoration: 'none' }}>
+            <Link to={'/'} key={uuid4()} style={{ textDecoration: 'none' }}>
               <NavigationItem
                 before={EmojiFrequentIcon} text={'Counter'} subText={'Progress bar\'s'}
               />
@@ -64,7 +67,7 @@ const ContainerNavigation = () => (
           </SidebarItem>
 
           <SidebarItem>
-            <Link to={'/'} key={'/'} style={{ textDecoration: 'none' }}>
+            <Link to={'/'} key={uuid4()} style={{ textDecoration: 'none' }}>
               <NavigationItem
                 before={VidRaisedHandIcon} text={'About'} subText={'About section'}
               />
@@ -72,7 +75,7 @@ const ContainerNavigation = () => (
           </SidebarItem>
 
           <SidebarItem>
-            <Link to={'/'} key={'/'} style={{ textDecoration: 'none' }}>
+            <Link to={'/'} key={uuid4()} style={{ textDecoration: 'none' }}>
               <NavigationItem
                 before={BoardIcon} text={'Services'} subText={'Services section'}
               />
@@ -80,7 +83,7 @@ const ContainerNavigation = () => (
           </SidebarItem>
 
           <SidebarItem>
-            <Link to={'/'} key={'/'} style={{ textDecoration: 'none' }}>
+            <Link to={'/'} key={uuid4()} style={{ textDecoration: 'none' }}>
               <NavigationItem
                 before={BitbucketPipelinesIcon}
                 text={'Journey'} subText={'Journey section'}
@@ -89,7 +92,7 @@ const ContainerNavigation = () => (
           </SidebarItem>
 
           <SidebarItem>
-            <Link to={'/'} key={'/'} style={{ textDecoration: 'none' }}>
+            <Link to={'/'} key={uuid4()} style={{ textDecoration: 'none' }}>
               <NavigationItem
                 before={StarFilledIcon}
                 text={'Projects'} subText={'Projects section'}
@@ -98,7 +101,7 @@ const ContainerNavigation = () => (
           </SidebarItem>
 
           <SidebarItem>
-            <Link to={'/'} key={'/'} style={{ textDecoration: 'none' }}>
+            <Link to={'/'} key={uuid4()} style={{ textDecoration: 'none' }}>
               <NavigationItem
                 before={EditorBoldIcon}
                 text={'Blog'} subText={'Site blog'}
@@ -107,7 +110,7 @@ const ContainerNavigation = () => (
           </SidebarItem>
 
           <SidebarItem>
-            <Link to={'/'} key={'/'} style={{ textDecoration: 'none' }}>
+            <Link to={'/'} key={uuid4()} style={{ textDecoration: 'none' }}>
               <NavigationItem
                 before={EmailIcon}
                 text={'Contact'} subText={'Mail box'}
@@ -117,7 +120,7 @@ const ContainerNavigation = () => (
 
           <Separator/>
           <GroupHeading>General</GroupHeading>
-          <Link to={'/'} key={'/'} style={{ textDecoration: 'none' }}>
+          <Link to={'/'} key={uuid4()} style={{ textDecoration: 'none' }}>
             <NavigationItem
               before={SettingsIcon}
               text={'Settings'} subText={'Global settings'}
@@ -125,7 +128,7 @@ const ContainerNavigation = () => (
           </Link>
 
           <SidebarItem>
-            <Link to={'/'} key={'/'} style={{ textDecoration: 'none' }}>
+            <Link to={'/'} key={uuid4()} style={{ textDecoration: 'none' }}>
               <NavigationItem
                 before={ArrowUpIcon}
                 text={'SEO'} subText={'SEO settings'}
@@ -134,9 +137,9 @@ const ContainerNavigation = () => (
           </SidebarItem>
 
           <SidebarItem>
-            <Link to={'/'} key={'/'} style={{ textDecoration: 'none' }}>
+            <Link to={'/'} key={uuid4()} style={{ textDecoration: 'none' }}>
               <NavigationItem
-                before={CreditcardIcon}
+                before={CreditCardIcon}
                 text={'Credentials'} subText={'API Credentials'}
               />
             </Link>
@@ -145,7 +148,7 @@ const ContainerNavigation = () => (
         </div>
       )}
     </MenuSection>
-  </Fragment>
+  </>
 );
 
 export default withRouter(ContainerNavigation);
