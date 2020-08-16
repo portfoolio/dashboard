@@ -16,6 +16,10 @@ import { prepareFormData } from 'util/helper';
 export default withRouter(({ history }: any): ReactElement => {
   const { header, shouldRedirect }: any = useSelector((state: any) => state.header);
 
+  if (shouldRedirect) {
+    history.push(HomeRoutes.HOME);
+  }
+
   const [image, setImage]: any = useState(null);
   const dispatch = useDispatch();
   const stableDispatch = useCallback(dispatch, []);
@@ -23,10 +27,6 @@ export default withRouter(({ history }: any): ReactElement => {
   useEffect(() => {
     stableDispatch(fetchHeader());
   }, [stableDispatch]);
-
-  if (shouldRedirect) {
-    history.push(HomeRoutes.HOME);
-  }
 
   if (!header) {
     return (<></>);
