@@ -5,7 +5,14 @@ const initialState = {
     title: '',
     subtitle: '',
     description: '',
-    image: ''
+    image: '',
+    links: {
+      facebook: '',
+      twitter: '',
+      instagram: '',
+      linkedIn: '',
+      github: '',
+    },
   },
   shouldRedirect: false,
 };

@@ -17,6 +17,7 @@ module.exports = {
     'react/prop-types': 'off',
     '@typescript-eslint/no-explicit-any': 'off',
     'jsx-a11y/anchor-is-valid': 'off',
+    'react-hooks/exhaustive-deps': 'off'
   },
   settings: {
     react: {
