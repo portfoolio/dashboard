@@ -16,6 +16,10 @@ import { prepareFormData } from 'util/helper';
 export default withRouter(({ history }: any): ReactElement => {
   const { header, shouldRedirect }: any = useSelector((state: any) => state.header);
 
+  if (shouldRedirect) {
+    history.push(HomeRoutes.HOME);
+  }
+
   const [image, setImage]: any = useState(null);
   const dispatch = useDispatch();
   const stableDispatch = useCallback(dispatch, []);
@@ -23,10 +27,6 @@ export default withRouter(({ history }: any): ReactElement => {
   useEffect(() => {
     stableDispatch(fetchHeader());
   }, [stableDispatch]);
-
-  if (shouldRedirect) {
-    history.push(HomeRoutes.HOME);
-  }
 
   if (!header) {
     return (<></>);
@@ -52,6 +52,26 @@ export default withRouter(({ history }: any): ReactElement => {
               {({ fieldProps }: { fieldProps: any }) => <TextArea placeholder={'Description'} {...fieldProps} />}
             </Field>
 
+            <Field name={'links.facebook'} defaultValue={header.links.facebook} label={'Facebook'}>
+              {({ fieldProps }: { fieldProps: any }) => <TextField placeholder={'Facebook'} {...fieldProps} />}
+            </Field>
+
+            <Field name={'links.instagram'} defaultValue={header.links.instagram} label={'Instagram'}>
+              {({ fieldProps }: { fieldProps: any }) => <TextField placeholder={'Instagram'} {...fieldProps} />}
+            </Field>
+
+            <Field name={'links.twitter'} defaultValue={header.links.twitter} label={'Twitter'}>
+              {({ fieldProps }: { fieldProps: any }) => <TextField placeholder={'Twitter'} {...fieldProps} />}
+            </Field>
+
+            <Field name={'links.linkedIn'} defaultValue={header.links.linkedIn} label={'LinkedIn'}>
+              {({ fieldProps }: { fieldProps: any }) => <TextField placeholder={'LinkedIn'} {...fieldProps} />}
+            </Field>
+
+            <Field name={'links.github'} defaultValue={header.links.github} label={'GitHub'}>
+              {({ fieldProps }: { fieldProps: any }) => <TextField placeholder={'GitHub'} {...fieldProps} />}
+            </Field>
+
             <FormImageInput
               form={'header'}
               fieldName={'image'}
@@ -61,6 +81,7 @@ export default withRouter(({ history }: any): ReactElement => {
               fieldLabel={'Image'}
               imageSelected={setImage}
             />
+
             <FormFooter />
           </form>
         )}

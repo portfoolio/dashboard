@@ -22,8 +22,9 @@ import CreditCardIcon from '@atlaskit/icon/glyph/creditcard';
 import ArrowUpIcon from '@atlaskit/icon/glyph/arrow-up';
 import SettingsIcon from '@atlaskit/icon/glyph/settings';
 
-import { Route as HeaderRoutes } from 'modules/Header/Router/types';
 import { uuid4 } from 'util/helper';
+import { Route as HeaderRoutes } from 'modules/Header/Router/types';
+import { Route as CounterRoutes } from 'modules/Counter/Router/types';
 
 const SidebarItem = styled.div`
   margin-top: 5px;
@@ -59,7 +60,7 @@ const ContainerNavigation = () => (
             />
           </Link>
           <SidebarItem>
-            <Link to={'/'} key={uuid4()} style={{ textDecoration: 'none' }}>
+            <Link to={CounterRoutes.LIST} key={uuid4()} style={{ textDecoration: 'none' }}>
               <NavigationItem
                 before={EmojiFrequentIcon} text={'Counter'} subText={'Progress bar\'s'}
               />

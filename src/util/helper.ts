@@ -6,7 +6,7 @@ export const uuid4 = () => 'xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx'.replace(/[xy]/
   return v.toString(16);
 });
 
-export const prepareFormData = (formData: any, { image = null, key = null }: { image?: any, key?: any }) => {
+export const prepareFormData = (formData: any, { image = null, key = null }: { image?: any, key?: any } = {}) => {
   if (!image) {
     return formData;
   }
