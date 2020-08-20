@@ -25,6 +25,8 @@ import SettingsIcon from '@atlaskit/icon/glyph/settings';
 import { uuid4 } from 'util/helper';
 import { Route as HeaderRoutes } from 'modules/Header/Router/types';
 import { Route as CounterRoutes } from 'modules/Counter/Router/types';
+import { Route as AboutRoutes } from 'modules/About/Router/types';
+import { Route as ServiceRoutes } from 'modules/Service/Router/types';
 
 const SidebarItem = styled.div`
   margin-top: 5px;
@@ -68,7 +70,7 @@ const ContainerNavigation = () => (
           </SidebarItem>
 
           <SidebarItem>
-            <Link to={'/'} key={uuid4()} style={{ textDecoration: 'none' }}>
+            <Link to={AboutRoutes.ABOUT} key={uuid4()} style={{ textDecoration: 'none' }}>
               <NavigationItem
                 before={VidRaisedHandIcon} text={'About'} subText={'About section'}
               />
@@ -76,7 +78,7 @@ const ContainerNavigation = () => (
           </SidebarItem>
 
           <SidebarItem>
-            <Link to={'/'} key={uuid4()} style={{ textDecoration: 'none' }}>
+            <Link to={ServiceRoutes.LIST} key={uuid4()} style={{ textDecoration: 'none' }}>
               <NavigationItem
                 before={BoardIcon} text={'Services'} subText={'Services section'}
               />

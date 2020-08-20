@@ -34,6 +34,6 @@ export default (
       return { ...state, shouldRedirect: action.shouldRedirect };
 
     default:
-      return state;
+      return {  ...state, ...initialState };
   }
 };
