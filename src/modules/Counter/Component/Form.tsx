@@ -35,6 +35,8 @@ export default withRouter(({ history, match }: any): ReactElement => {
     }
   }, [stableDispatch, match.params.id]);
 
+  console.log(counter);
+
   if (!counter) {
     return (<></>);
   }
