@@ -24,7 +24,7 @@ export default (
   switch (action.type) {
     case ActionType.FETCH_HEADER_FULFILLED:
     case ActionType.FETCH_HEADER:
-      const header = action.header;
+      const header = action.header || initialState.header;
       return { ...state, header };
 
     case ActionType.UPDATE_HEADER:

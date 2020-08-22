@@ -31,6 +31,7 @@ export default (
       state.showLoader = !state.showLoader;
 
       return { ...state };
+
     default:
       return state;
   }

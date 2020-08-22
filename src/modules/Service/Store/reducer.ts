@@ -7,6 +7,10 @@ const initialState = {
     description: '',
     icon: '',
   },
+  header: {
+    title: '',
+    description: '',
+  },
   shouldRedirect: false,
 };
 
@@ -18,7 +22,7 @@ export default (
     case ActionType.FETCH_SERVICES:
     case ActionType.FETCH_SERVICE:
     case ActionType.FETCH_SERVICE_FULFILLED:
-      const service = action.service;
+      const service = action.service || initialState.currentItem;
       return { ...state, currentItem: service };
 
     case ActionType.REMOVE_SERVICE:
@@ -33,6 +37,11 @@ export default (
 
     case ActionType.REDIRECT_AFTER_CREATION:
       return { ...state, shouldRedirect: action.shouldRedirect };
+
+    case ActionType.FETCH_HEADER:
+    case ActionType.FETCH_HEADER_FUL_FILLED:
+      const header = action.header || initialState.header;
+      return { ...state, header };
 
     default:
       return state;

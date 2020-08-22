@@ -3,6 +3,7 @@ import { withRouter } from 'react-router';
 import { useSelector } from 'react-redux';
 import Form, { Field } from '@atlaskit/form';
 import TextField from '@atlaskit/textfield';
+import TextArea from '@atlaskit/textarea';
 import { useDispatch } from 'react-redux';
 
 import { Route as ServiceRoutes } from 'modules/Service/Router/types';
@@ -10,7 +11,6 @@ import ButtonBack from 'modules/Core/Component/Form/ButtonBack';
 import FormFooter from 'modules/Core/Component/Form/Footer';
 import { prepareFormData } from 'util/helper';
 import { createService, fetchService, updateService } from 'modules/Service/Store/actions';
-import TextArea from '@atlaskit/textarea';
 
 export default withRouter(({ history, match }: any): ReactElement => {
   const { currentItem: service, shouldRedirect }: any = useSelector((state: any) => state.service);
@@ -35,10 +35,6 @@ export default withRouter(({ history, match }: any): ReactElement => {
       stableDispatch(fetchService(match.params.id));
     }
   }, [stableDispatch, match.params.id]);
-
-  if (!service) {
-    return (<></>);
-  }
 
   return (
     <section>

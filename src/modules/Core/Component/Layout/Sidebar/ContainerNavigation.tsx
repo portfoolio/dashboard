@@ -16,7 +16,6 @@ import VidRaisedHandIcon from '@atlaskit/icon/glyph/vid-raised-hand';
 import BitbucketPipelinesIcon from '@atlaskit/icon/glyph/bitbucket/pipelines';
 import EditorBoldIcon from '@atlaskit/icon/glyph/editor/bold';
 import EmailIcon from '@atlaskit/icon/glyph/email';
-import BoardIcon from '@atlaskit/icon/glyph/board';
 import StarFilledIcon from '@atlaskit/icon/glyph/star-filled';
 import CreditCardIcon from '@atlaskit/icon/glyph/creditcard';
 import ArrowUpIcon from '@atlaskit/icon/glyph/arrow-up';
@@ -26,7 +25,7 @@ import { uuid4 } from 'util/helper';
 import { Route as HeaderRoutes } from 'modules/Header/Router/types';
 import { Route as CounterRoutes } from 'modules/Counter/Router/types';
 import { Route as AboutRoutes } from 'modules/About/Router/types';
-import { Route as ServiceRoutes } from 'modules/Service/Router/types';
+import { NestableService } from 'modules/Core/Component/Layout/Sidebar/Nestable/Service';
 
 const SidebarItem = styled.div`
   margin-top: 5px;
@@ -77,13 +76,7 @@ const ContainerNavigation = () => (
             </Link>
           </SidebarItem>
 
-          <SidebarItem>
-            <Link to={ServiceRoutes.LIST} key={uuid4()} style={{ textDecoration: 'none' }}>
-              <NavigationItem
-                before={BoardIcon} text={'Services'} subText={'Services section'}
-              />
-            </Link>
-          </SidebarItem>
+          <NestableService />
 
           <SidebarItem>
             <Link to={'/'} key={uuid4()} style={{ textDecoration: 'none' }}>

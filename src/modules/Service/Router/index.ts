@@ -5,6 +5,7 @@ import { AppRouteDefinition } from 'modules/Core/types';
 import ServiceList from 'modules/Service/Page/List';
 import ServiceCreate from 'modules/Service/Page/Create';
 import ServiceEdit from 'modules/Service/Page/Edit';
+import ServiceHeader from 'modules/Service/Page/Header';
 
 const routes: AppRouteDefinition[] = [
   {
@@ -25,6 +26,13 @@ const routes: AppRouteDefinition[] = [
     path: Route.EDIT,
     Component: withMetadata(ServiceEdit, {
       title: 'Edit Service',
+    }),
+    guarded: true,
+  },
+  {
+    path: Route.HEADER,
+    Component: withMetadata(ServiceHeader, {
+      title: 'Header',
     }),
     guarded: true,
   },

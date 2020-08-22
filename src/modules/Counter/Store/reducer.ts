@@ -17,7 +17,7 @@ export default (
     case ActionType.FETCH_COUNTERS:
     case ActionType.FETCH_COUNTER:
     case ActionType.FETCH_COUNTER_FULFILLED:
-      const counter = action.counter;
+      const counter = action.counter || initialState.currentItem;
       return { ...state, currentItem: counter };
 
     case ActionType.REMOVE_COUNTER:
@@ -34,6 +34,6 @@ export default (
       return { ...state, shouldRedirect: action.shouldRedirect };
 
     default:
-      return {  ...state, ...initialState };
+      return state;
   }
 };

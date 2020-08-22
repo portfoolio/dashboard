@@ -28,10 +28,6 @@ export default withRouter(({ history }: any): ReactElement => {
     stableDispatch(fetchHeader());
   }, [stableDispatch]);
 
-  if (!header) {
-    return (<></>);
-  }
-
   return (
     <section>
       <ButtonBack path={HomeRoutes.HOME} titleBefore={'Header Form'} />

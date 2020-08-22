@@ -26,10 +26,6 @@ export default withRouter(({ history }: any): ReactElement => {
     stableDispatch(fetchAbout());
   }, [stableDispatch]);
 
-  if (!about) {
-    return (<></>);
-  }
-
   return (
     <section>
       <ButtonBack path={HomeRoutes.HOME} titleBefore={'About Form'} />

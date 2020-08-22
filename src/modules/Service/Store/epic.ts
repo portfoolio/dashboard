@@ -4,11 +4,13 @@ import { concat, from, of } from 'rxjs';
 import { ServiceInterface } from 'util/Service';
 import { ActionType } from './types';
 import {
-  fetchServiceFullFilled, fetchServices,
+  fetchHeaderFullFilled,
+  fetchServiceFullFilled,
+  fetchServices,
   fetchServicesFullFilled,
   redirectAfterCreation,
 } from './actions';
-import { Service as ServiceEndpoints } from 'common/api';
+import { Service as ServiceEndpoints, ServiceHeader } from 'common/api';
 import { showNotification } from 'modules/Core/Store/actions';
 
 const fetchServicesEpic = (
@@ -108,10 +110,48 @@ const fetchServiceEpic = (
   );
 };
 
+const fetchServiceHeaderEpic = (
+  action$: ActionsObservable<any>,
+  state$: StateObservable<any>,
+  { Service }: { Service: ServiceInterface },
+) => {
+  return action$.pipe(
+    ofType(ActionType.FETCH_HEADER),
+    mergeMap(() => {
+      return from(Service.request(ServiceHeader.find)).pipe(
+        map((response: any) => fetchHeaderFullFilled(response)),
+      );
+    }),
+  );
+};
+
+const updateServiceHeaderEpic = (
+  action$: ActionsObservable<any>,
+  state$: StateObservable<any>,
+  { Service }: { Service: ServiceInterface },
+) => {
+  return action$.pipe(
+    ofType(ActionType.UPDATE_HEADER),
+    mergeMap(({ data }: { data: object }) => {
+      return from(Service.request(ServiceHeader.update, {}, data)).pipe(
+        mergeMap(() => {
+          return concat(
+            of(redirectAfterCreation(true)),
+            of(fetchServices()),
+            of(showNotification('Header successfully updated.')),
+          );
+        }),
+      );
+    }),
+  );
+};
+
 export default {
   fetchServicesEpic,
   createServiceEpic,
   fetchServiceEpic,
   updateServiceEpic,
   removeServiceEpic,
+  fetchServiceHeaderEpic,
+  updateServiceHeaderEpic,
 };

@@ -15,7 +15,7 @@ export default (
   switch (action.type) {
     case ActionType.FETCH_ABOUT_FULFILLED:
     case ActionType.FETCH_ABOUT:
-      const about = action.about;
+      const about = action.about || initialState.about;
       return { ...state, about };
 
     case ActionType.UPDATE_ABOUT:

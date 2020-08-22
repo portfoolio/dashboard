@@ -54,3 +54,23 @@ export function removeService(id: string) {
     id,
   };
 }
+
+export function fetchHeader() {
+  return {
+    type: ActionType.FETCH_HEADER,
+  }
+}
+
+export function fetchHeaderFullFilled(header: object) {
+  return {
+    type: ActionType.FETCH_HEADER_FUL_FILLED,
+    header,
+  };
+}
+
+export function updateHeader(data: object) {
+  return {
+    type: ActionType.UPDATE_HEADER,
+    data
+  }
+}
