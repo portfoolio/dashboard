@@ -5,27 +5,27 @@ import { ServiceInterface } from 'util/Service';
 import { ActionType } from './types';
 import {
   fetchHeaderFullFilled,
-  fetchServiceFullFilled,
-  fetchServices,
-  fetchServicesFullFilled,
+  fetchProjectFullFilled,
+  fetchProjects,
+  fetchProjectsFullFilled,
   redirectAfterCreation,
 } from './actions';
-import { Service as ServiceEndpoints, ServiceHeader } from 'common/api';
+import { Project, ProjectHeader } from 'common/api';
 import { showNotification } from 'modules/Core/Store/actions';
 
-const fetchServicesEpic = (
+const fetchProjectsEpic = (
   action$: ActionsObservable<any>,
   state$: StateObservable<any>,
   { Service }: { Service: ServiceInterface },
 ) => {
   return action$.pipe(
-    ofType(ActionType.FETCH_SERVICES),
+    ofType(ActionType.FETCH_PROJECTS),
     mergeMap(() => {
-      return from(Service.request(ServiceEndpoints.list)).pipe(
+      return from(Service.request(Project.list)).pipe(
         mergeMap((response: any) => {
             return concat(
               of(redirectAfterCreation(false)),
-              of(fetchServicesFullFilled(response)),
+              of(fetchProjectsFullFilled(response)),
             );
           },
         ),
@@ -34,19 +34,19 @@ const fetchServicesEpic = (
   );
 };
 
-const createServiceEpic = (
+const createProjectEpic = (
   action$: ActionsObservable<any>,
   state$: StateObservable<any>,
   { Service }: { Service: ServiceInterface },
 ) => {
   return action$.pipe(
-    ofType(ActionType.CREATE_SERVICE),
+    ofType(ActionType.CREATE_PROJECT),
     mergeMap(({ data }: { data: object }) => {
-      return from(Service.request(ServiceEndpoints.create, {}, data)).pipe(
+      return from(Service.request(Project.create, {}, data)).pipe(
         mergeMap(() => {
           return concat(
             of(redirectAfterCreation(true)),
-            of(showNotification('Service successfully created.')),
+            of(showNotification('Project successfully created.')),
           );
         }),
       );
@@ -54,19 +54,19 @@ const createServiceEpic = (
   );
 };
 
-const removeServiceEpic = (
+const removeProjectEpic = (
   action$: ActionsObservable<any>,
   state$: StateObservable<any>,
   { Service }: { Service: ServiceInterface },
 ) => {
   return action$.pipe(
-    ofType(ActionType.REMOVE_SERVICE),
+    ofType(ActionType.REMOVE_PROJECT),
     mergeMap(({ id }: any) => {
-      return from(Service.request(ServiceEndpoints.delete, { id })).pipe(
+      return from(Service.request(Project.delete, { id })).pipe(
         mergeMap(() => {
           return concat(
-            of(fetchServices()),
-            of(showNotification('Service successfully removed.')),
+            of(fetchProjects()),
+            of(showNotification('Project successfully removed.')),
           );
         }),
       );
@@ -74,20 +74,20 @@ const removeServiceEpic = (
   );
 };
 
-const updateServiceEpic = (
+const updateProjectEpic = (
   action$: ActionsObservable<any>,
   state$: StateObservable<any>,
   { Service }: { Service: ServiceInterface },
 ) => {
   return action$.pipe(
-    ofType(ActionType.UPDATE_SERVICE),
+    ofType(ActionType.UPDATE_PROJECT),
     mergeMap(({ data }: { data: object }) => {
-      return from(Service.request(ServiceEndpoints.update, {}, data)).pipe(
+      return from(Service.request(Project.update, {}, data)).pipe(
         mergeMap(() => {
           return concat(
             of(redirectAfterCreation(true)),
-            of(fetchServices()),
-            of(showNotification('Service successfully updated.')),
+            of(fetchProjects()),
+            of(showNotification('Project successfully updated.')),
           );
         }),
       );
@@ -95,49 +95,49 @@ const updateServiceEpic = (
   );
 };
 
-const fetchServiceEpic = (
+const fetchProjectEpic = (
   action$: ActionsObservable<any>,
   state$: StateObservable<any>,
   { Service }: { Service: ServiceInterface },
 ) => {
   return action$.pipe(
-    ofType(ActionType.FETCH_SERVICE),
-    mergeMap(({  id }: any) => {
-      return from(Service.request(ServiceEndpoints.find, { id })).pipe(
-        map((response: any) => fetchServiceFullFilled(response)),
+    ofType(ActionType.FETCH_PROJECT),
+    mergeMap(({ id }: any) => {
+      return from(Service.request(Project.find, { id })).pipe(
+        map((response: any) => fetchProjectFullFilled(response)),
       );
     }),
   );
 };
 
-const fetchServiceHeaderEpic = (
+const fetchProjectHeaderEpic = (
   action$: ActionsObservable<any>,
   state$: StateObservable<any>,
   { Service }: { Service: ServiceInterface },
 ) => {
   return action$.pipe(
-    ofType(ActionType.FETCH_SERVICE_HEADER),
+    ofType(ActionType.FETCH_PROJECT_HEADER),
     mergeMap(() => {
-      return from(Service.request(ServiceHeader.find)).pipe(
+      return from(Service.request(ProjectHeader.find)).pipe(
         map((response: any) => fetchHeaderFullFilled(response)),
       );
     }),
   );
 };
 
-const updateServiceHeaderEpic = (
+const updateProjectHeaderEpic = (
   action$: ActionsObservable<any>,
   state$: StateObservable<any>,
   { Service }: { Service: ServiceInterface },
 ) => {
   return action$.pipe(
-    ofType(ActionType.UPDATE_SERVICE_HEADER),
+    ofType(ActionType.UPDATE_PROJECT_HEADER),
     mergeMap(({ data }: { data: object }) => {
-      return from(Service.request(ServiceHeader.update, {}, data)).pipe(
+      return from(Service.request(ProjectHeader.update, {}, data)).pipe(
         mergeMap(() => {
           return concat(
             of(redirectAfterCreation(true)),
-            of(fetchServices()),
+            of(fetchProjects()),
             of(showNotification('Header successfully updated.')),
           );
         }),
@@ -147,11 +147,11 @@ const updateServiceHeaderEpic = (
 };
 
 export default {
-  fetchServicesEpic,
-  createServiceEpic,
-  fetchServiceEpic,
-  updateServiceEpic,
-  removeServiceEpic,
-  fetchServiceHeaderEpic,
-  updateServiceHeaderEpic,
+  fetchProjectsEpic,
+  createProjectEpic,
+  fetchProjectEpic,
+  updateProjectEpic,
+  removeProjectEpic,
+  fetchProjectHeaderEpic,
+  updateProjectHeaderEpic,
 };

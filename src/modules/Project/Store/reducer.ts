@@ -1,11 +1,11 @@
 import { ActionType } from './types';
 
 const initialState = {
-  services: [],
+  projects: [],
   currentItem: {
     title: '',
-    description: '',
-    icon: '',
+    subtitle: '',
+    image: '',
   },
   header: {
     title: '',
@@ -19,27 +19,27 @@ export default (
   action: any,
 ): object => {
   switch (action.type) {
-    case ActionType.FETCH_SERVICES:
-    case ActionType.FETCH_SERVICE:
-    case ActionType.FETCH_SERVICE_FULFILLED:
-      const service = action.service || initialState.currentItem;
-      return { ...state, currentItem: service };
+    case ActionType.FETCH_PROJECTS:
+    case ActionType.FETCH_PROJECT:
+    case ActionType.FETCH_PROJECT_FULFILLED:
+      const project = action.project || initialState.currentItem;
+      return { ...state, currentItem: project };
 
-    case ActionType.REMOVE_SERVICE:
+    case ActionType.REMOVE_PROJECT:
       return { ...state };
 
-    case ActionType.FETCH_SERVICES_FULFILLED:
-      const services = action.services || [];
-      return { ...state, services };
+    case ActionType.FETCH_PROJECTS_FULFILLED:
+      const projects = action.projects || [];
+      return { ...state, projects };
 
-    case ActionType.CREATE_SERVICE:
+    case ActionType.CREATE_PROJECT:
       return { ...state };
 
     case ActionType.REDIRECT_AFTER_CREATION:
       return { ...state, shouldRedirect: action.shouldRedirect };
 
-    case ActionType.FETCH_SERVICE_HEADER:
-    case ActionType.FETCH_SERVICE_HEADER_FUL_FILLED:
+    case ActionType.FETCH_PROJECT_HEADER:
+    case ActionType.FETCH_PROJECT_HEADER_FUL_FILLED:
       const header = action.header || initialState.header;
       return { ...state, header };
 

@@ -13,10 +13,8 @@ import EditorHorizontalRuleIcon from '@atlaskit/icon/glyph/editor/horizontal-rul
 import GraphLineIcon from '@atlaskit/icon/glyph/graph-line';
 import EmojiFrequentIcon from '@atlaskit/icon/glyph/emoji/frequent';
 import VidRaisedHandIcon from '@atlaskit/icon/glyph/vid-raised-hand';
-import BitbucketPipelinesIcon from '@atlaskit/icon/glyph/bitbucket/pipelines';
 import EditorBoldIcon from '@atlaskit/icon/glyph/editor/bold';
 import EmailIcon from '@atlaskit/icon/glyph/email';
-import StarFilledIcon from '@atlaskit/icon/glyph/star-filled';
 import CreditCardIcon from '@atlaskit/icon/glyph/creditcard';
 import ArrowUpIcon from '@atlaskit/icon/glyph/arrow-up';
 import SettingsIcon from '@atlaskit/icon/glyph/settings';
@@ -25,7 +23,10 @@ import { uuid4 } from 'util/helper';
 import { Route as HeaderRoutes } from 'modules/Header/Router/types';
 import { Route as CounterRoutes } from 'modules/Counter/Router/types';
 import { Route as AboutRoutes } from 'modules/About/Router/types';
+
 import { NestableService } from 'modules/Core/Component/Layout/Sidebar/Nestable/Service';
+import { NestableJourney } from 'modules/Core/Component/Layout/Sidebar/Nestable/Journey';
+import { NestableProject } from 'modules/Core/Component/Layout/Sidebar/Nestable/Project';
 
 const SidebarItem = styled.div`
   margin-top: 5px;
@@ -78,23 +79,9 @@ const ContainerNavigation = () => (
 
           <NestableService />
 
-          <SidebarItem>
-            <Link to={'/'} key={uuid4()} style={{ textDecoration: 'none' }}>
-              <NavigationItem
-                before={BitbucketPipelinesIcon}
-                text={'Journey'} subText={'Journey section'}
-              />
-            </Link>
-          </SidebarItem>
+          <NestableJourney />
 
-          <SidebarItem>
-            <Link to={'/'} key={uuid4()} style={{ textDecoration: 'none' }}>
-              <NavigationItem
-                before={StarFilledIcon}
-                text={'Projects'} subText={'Projects section'}
-              />
-            </Link>
-          </SidebarItem>
+          <NestableProject />
 
           <SidebarItem>
             <Link to={'/'} key={uuid4()} style={{ textDecoration: 'none' }}>
