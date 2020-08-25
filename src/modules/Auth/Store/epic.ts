@@ -4,6 +4,7 @@ import { concat, from, of } from 'rxjs';
 import { ServiceInterface } from 'util/Service';
 import { ActionType } from 'modules/Auth/Store/types';
 import { loginFailed, loginSuccessfully, } from 'modules/Auth/Store/actions';
+import { Auth } from 'common/api';
 
 const authLogin = (
   action$: ActionsObservable<any>,
@@ -13,7 +14,7 @@ const authLogin = (
   return action$.pipe(
     ofType(ActionType.LOGIN),
     mergeMap(({ data: { email, password } }) => {
-      return from(Service.request({ path: '/', method: 'POST' }, {}, { email, password })).pipe(
+      return from(Service.request(Auth.login, {}, { email, password })).pipe(
         mergeMap((response: any) => {
             return concat(
               of(

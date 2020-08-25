@@ -14,7 +14,6 @@ import Button from '@atlaskit/button';
 import styled from 'styled-components';
 import _ from 'lodash';
 import RemoveModal from 'modules/Core/Component/Modal/RemoveModal';
-import RefinementBar, { SearchFilter } from '@atlaskit/refinement-bar';
 
 export const ButtonWrapper = styled.div`
   float: right;
@@ -177,14 +176,6 @@ class Table extends Component<any, any> {
                       Create
                     </Button>
                   </ButtonWrapper>
-                  <div style={{ marginRight: 20, display: 'inline-block', float: 'right' }}>
-                    <RefinementBar
-                      fieldConfig={{ search: { label: 'Search', type: SearchFilter } }}
-                      irremovableKeys={['search']}
-                      onChange={() => console.log('adawdawd')}
-                      value={''}
-                    />
-                  </div>
                 </TableTopWrapper>
               }
             </Fragment>

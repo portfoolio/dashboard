@@ -1,60 +1,46 @@
-import PropTypes from 'prop-types';
-import React, { Component, Fragment } from 'react';
-import { connect } from 'react-redux';
+import React, { ReactElement, useCallback, useEffect } from 'react';
 import { formatRoute } from 'react-router-named-routes';
 
-import { GlobalState } from 'modules/Core/types';
 import LayoutWrapper from 'modules/Core/Component/Layout/Wrapper';
 import LayoutTitle from 'modules/Core/Component/Layout/Title';
 import { Route as HomeRoutes } from 'modules/Home/Router/types';
+import { useDispatch, useSelector } from 'react-redux';
+import { redirectAfterUpdate } from 'modules/Header/Store/actions';
 
-class Main extends Component<any, any> {
-  static contextTypes = {
-    showModal: PropTypes.func,
-    addFlag: PropTypes.func,
-    onConfirm: PropTypes.func,
-    onCancel: PropTypes.func,
-    onClose: PropTypes.func,
-  };
+export default (): ReactElement => {
+  const { user }: any = useSelector((state: any) => state.auth);
+  const dispatch = useDispatch();
+  const stableDispatch = useCallback(dispatch, []);
 
-  render() {
-    return (
-      <LayoutWrapper>
-        <LayoutTitle breadcrumbs={
-          [
-            {
-              title: 'Dashboard',
-              route: formatRoute(HomeRoutes.HOME),
-            },
-          ]
-        }>
-          Home
-        </LayoutTitle>
-        <section>
-          <p>
-            {
-              this.props.user
-                ? (
-                  <Fragment>
-                    Hello, {this.props.user.firstName} {this.props.user.lastName}!
-                  </Fragment>
-                )
-                : 'Failed to retrieve user.'
-            }
-          </p>
-        </section>
-      </LayoutWrapper>
-    );
-  }
+  useEffect(() => {
+    stableDispatch(redirectAfterUpdate(false));
+  }, [stableDispatch]);
+
+  return (
+    <LayoutWrapper>
+      <LayoutTitle breadcrumbs={
+        [
+          {
+            title: 'Dashboard',
+            route: formatRoute(HomeRoutes.HOME),
+          },
+        ]
+      }>
+        Home
+      </LayoutTitle>
+      <section>
+        <p>
+          {
+            user
+              ? (
+                <>
+                  Hello, {user.firstName} {user.lastName}!
+                </>
+              )
+              : 'Failed to retrieve user.'
+          }
+        </p>
+      </section>
+    </LayoutWrapper>
+  );
 }
-
-const mapStateToProps = (state: GlobalState): {
-  user: any | null,
-} => {
-  const { user } = state.auth;
-  return {
-    user,
-  };
-};
-
-export default connect(mapStateToProps)(Main);

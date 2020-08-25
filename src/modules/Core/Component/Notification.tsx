@@ -4,6 +4,7 @@ import SuccessIcon from '@atlaskit/icon/glyph/check-circle';
 import { AutoDismissFlag, FlagGroup } from '@atlaskit/flag';
 import { connect } from 'react-redux';
 import { ActionType } from 'modules/Core/Store/types';
+import { uuid4 } from 'util/helper';
 
 class Notification extends Component<any, any> {
   state = {
@@ -30,16 +31,7 @@ class Notification extends Component<any, any> {
         {
           <FlagGroup onDismissed={this.handleDismiss}>
             {this.state.notifications.map((flag: any) => {
-              const id = (() => {
-                // eslint-disable-next-line
-                return 'xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx'.replace(/[xy]/g, (c: any) => {
-                  // eslint-disable-next-line
-                  const r = Math.random() * 16 | 0;
-                  // eslint-disable-next-line
-                  const v = c == 'x' ? r : (r & 0x3 | 0x8);
-                  return v.toString(16);
-                });
-              })();
+              const id = uuid4();
 
               return (
                 <AutoDismissFlag

@@ -1,11 +1,11 @@
-import React, { Component } from 'react';
+import React, { ReactElement } from 'react';
 import { BrowserRouter, Route, Redirect, Switch } from 'react-router-dom';
-import { connect } from 'react-redux';
+import { useSelector } from 'react-redux';
 import { formatRoute } from 'react-router-named-routes';
 
 import App from 'modules/Core/App';
 import { Route as LoginRoute } from 'modules/Auth/Router/types';
-import { AppRouteDefinition, GlobalState } from 'modules/Core/types';
+import { AppRouteDefinition } from 'modules/Core/types';
 
 let routers: AppRouteDefinition[] = [];
 
@@ -15,46 +15,27 @@ req.keys().map((key: string) => {
   return key;
 });
 
-class Router extends Component<any, any> {
-  state = {
-    navOpenState: {
-      isOpen: true,
-    },
-    routers,
-  };
+export default (): ReactElement => {
+  const { isAuthenticated }: any = useSelector((state: any) => state.auth);
 
-  static defaultProps = {
-    isAuthenticated: false,
-  };
-
-  render() {
-    return (
-      <BrowserRouter>
-        <Switch>
-          {this.state.routers.map(({ guarded, path, Component: PageComponent }: AppRouteDefinition, i: number) =>
+  return (
+    <BrowserRouter>
+      <Switch>
+        {
+          routers.map(({ guarded, path, Component: PageComponent }: AppRouteDefinition, i: number) =>
             <Route
               key={i}
               exact
               path={path}
               render={() => (
-                guarded && !this.props.isAuthenticated
+                guarded && !isAuthenticated
                   ? <Redirect to={formatRoute(LoginRoute.LOGIN)} />
-                  : <App><PageComponent /></App>
+                  : <App> <PageComponent /> </App>
               )}
             />,
-          )}
-        </Switch>
-      </BrowserRouter>
-    );
-  }
+          )
+        }
+      </Switch>
+    </BrowserRouter>
+  );
 }
-
-const mapStateToProps = (state: GlobalState): { isAuthenticated: boolean } => {
-  const { isAuthenticated } = state.auth;
-
-  return {
-    isAuthenticated,
-  };
-};
-
-export default connect(mapStateToProps)(Router);
