@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React, { FunctionComponent } from 'react';
 import styled from 'styled-components';
 import { Link } from 'react-router-dom';
 import Button from '@atlaskit/button';
@@ -16,27 +16,23 @@ const StyledButtonWrapper = styled.div`
   font-size: 14px;
 `;
 
-const ButtonWrapper = ({ children }: {
-  children: React.ReactNode;
-}) => (
-  <StyledButtonWrapper>
-    {children}
-  </StyledButtonWrapper>
+const ButtonWrapper = ({ children }: { children: React.ReactNode }) => (
+  <StyledButtonWrapper>{children}</StyledButtonWrapper>
 );
 
-class ButtonBack extends Component<any, any> {
-  render() {
-    return (
-      <ButtonContainer>
-        <h4 style={{display: 'inline-block'}}>{this.props.titleBefore}</h4>
-        <ButtonWrapper>
-          <Link to={this.props.path}>
-            <Button appearance='primary' iconBefore={<ArrowLeftIcon label='Go Back' size='small' />}>Back</Button>
-          </Link>
-        </ButtonWrapper>
-      </ButtonContainer>
-    );
-  }
-}
+const ButtonBack: FunctionComponent<any> = (props) => {
+  return (
+    <ButtonContainer>
+      <h4 style={{ display: 'inline-block' }}>{props.titleBefore}</h4>
+      <ButtonWrapper>
+        <Link to={props.path}>
+          <Button appearance="primary" iconBefore={<ArrowLeftIcon label="Go Back" size="small" />}>
+            Back
+          </Button>
+        </Link>
+      </ButtonWrapper>
+    </ButtonContainer>
+  );
+};
 
 export default connect(null, null)(ButtonBack);

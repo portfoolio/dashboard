@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React, { FunctionComponent } from 'react';
 import { connect } from 'react-redux';
 
 import Page from '@atlaskit/page';
@@ -8,26 +8,24 @@ import Sidebar from './Component/Layout/Sidebar';
 import Loader from './Component/Loader';
 import Toast from './Component/Layout/Toast';
 
-class App extends Component<any, any> {
-  render() {
-    return (
-      <>
-        { this.props.showLoader ? <Loader /> : ('') }
-        <div style={{ opacity: `${this.props.showLoader ? '.' : ''}1` }}>
-          <Page
-            id={'ak-page-wrapper'}
-            navigationWidth={this.props.isAuthenticated ? 304 : 0}
-            navigation={this.props.isAuthenticated && <Sidebar />}
-          >
-            { this.props.children }
-          </Page>
+const App: FunctionComponent<any> = (props) => {
+  return (
+    <>
+      {props.showLoader ? <Loader /> : ''}
+      <div style={{ opacity: `${props.showLoader ? '.' : ''}1` }}>
+        <Page
+          id={'ak-page-wrapper'}
+          navigationWidth={props.isAuthenticated ? 304 : 0}
+          navigation={props.isAuthenticated && <Sidebar />}
+        >
+          {props.children}
+        </Page>
 
-          <Toast />
-        </div>
-      </>
-    );
-  }
-}
+        <Toast />
+      </div>
+    </>
+  );
+};
 
 const mapStateToProps = (state: any): any => {
   const { isAuthenticated } = state.auth;

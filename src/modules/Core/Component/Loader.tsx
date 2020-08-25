@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React, { useState, FunctionComponent } from 'react';
 import { css } from '@emotion/core';
 import GridLoader from 'react-spinners/GridLoader';
 
@@ -11,28 +11,16 @@ const override = css`
   margin: 0px auto;
 `;
 
-class Loader extends Component<any, any> {
-  constructor(props: any) {
-    super(props);
-    this.state = {
-      loading: true,
-    };
-  }
+const Loader: FunctionComponent<any> = () => {
+  const [loading] = useState(true);
 
-  render() {
-    return (
-      <>
-        <div className={'sweet-loading'}>
-          <GridLoader
-            css={override}
-            size={15}
-            color={'#123abc'}
-            loading={this.state.loading}
-          />
-        </div>
-      </>
-    );
-  }
-}
+  return (
+    <>
+      <div className={'sweet-loading'}>
+        <GridLoader css={override} size={15} color={'#123abc'} loading={loading} />
+      </div>
+    </>
+  );
+};
 
 export default Loader;
