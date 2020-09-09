@@ -5,12 +5,12 @@ import { ServiceInterface } from 'util/Service';
 import { ActionType } from './types';
 import {
   fetchHeaderFullFilled,
-  fetchTechnologieFullFilled,
   fetchTechnologies,
   fetchTechnologiesFullFilled,
+  fetchTechnologyFullFilled,
   redirectAfterCreation,
 } from './actions';
-import { Technologie, TechnologieHeader } from 'common/api';
+import { Technology, TechnologyHeader } from 'common/api';
 import { showNotification } from 'modules/Core/Store/actions';
 
 const fetchTechnologiesEpic = (
@@ -19,9 +19,9 @@ const fetchTechnologiesEpic = (
   { Service }: { Service: ServiceInterface },
 ) => {
   return action$.pipe(
-    ofType(ActionType.FETCH_TECHNOLOGIESS),
+    ofType(ActionType.FETCH_TECHNOLOGIES),
     mergeMap(() => {
-      return from(Service.request(Technologie.list)).pipe(
+      return from(Service.request(Technology.list)).pipe(
         mergeMap((response: any) => {
             return concat(
               of(redirectAfterCreation(false)),
@@ -34,19 +34,19 @@ const fetchTechnologiesEpic = (
   );
 };
 
-const createTechnologieEpic = (
+const createTechnologyEpic = (
   action$: ActionsObservable<any>,
   state$: StateObservable<any>,
   { Service }: { Service: ServiceInterface },
 ) => {
   return action$.pipe(
-    ofType(ActionType.CREATE_TECHNOLOGIES),
+    ofType(ActionType.CREATE_TECHNOLOGY),
     mergeMap(({ data }: { data: object }) => {
-      return from(Service.request(Technologie.create, {}, data)).pipe(
+      return from(Service.request(Technology.create, {}, data)).pipe(
         mergeMap(() => {
           return concat(
             of(redirectAfterCreation(true)),
-            of(showNotification('Technologie successfully created.')),
+            of(showNotification('Technology successfully created.')),
           );
         }),
       );
@@ -54,19 +54,19 @@ const createTechnologieEpic = (
   );
 };
 
-const removeTechnologieEpic = (
+const removeTechnologyEpic = (
   action$: ActionsObservable<any>,
   state$: StateObservable<any>,
   { Service }: { Service: ServiceInterface },
 ) => {
   return action$.pipe(
-    ofType(ActionType.REMOVE_TECHNOLOGIES),
+    ofType(ActionType.REMOVE_TECHNOLOGY),
     mergeMap(({ id }: any) => {
-      return from(Service.request(Technologie.delete, { id })).pipe(
+      return from(Service.request(Technology.delete, { id })).pipe(
         mergeMap(() => {
           return concat(
             of(fetchTechnologies()),
-            of(showNotification('Technologie successfully removed.')),
+            of(showNotification('Technology successfully removed.')),
           );
         }),
       );
@@ -74,20 +74,20 @@ const removeTechnologieEpic = (
   );
 };
 
-const updateTechnologieEpic = (
+const updateTechnologyEpic = (
   action$: ActionsObservable<any>,
   state$: StateObservable<any>,
   { Service }: { Service: ServiceInterface },
 ) => {
   return action$.pipe(
-    ofType(ActionType.UPDATE_TECHNOLOGIES),
+    ofType(ActionType.UPDATE_TECHNOLOGY),
     mergeMap(({ data }: { data: object }) => {
-      return from(Service.request(Technologie.update, {}, data)).pipe(
+      return from(Service.request(Technology.update, {}, data)).pipe(
         mergeMap(() => {
           return concat(
             of(redirectAfterCreation(true)),
             of(fetchTechnologies()),
-            of(showNotification('Technologie successfully updated.')),
+            of(showNotification('Technology successfully updated.')),
           );
         }),
       );
@@ -95,45 +95,45 @@ const updateTechnologieEpic = (
   );
 };
 
-const fetchTechnologieEpic = (
+const fetchTechnologyEpic = (
   action$: ActionsObservable<any>,
   state$: StateObservable<any>,
   { Service }: { Service: ServiceInterface },
 ) => {
   return action$.pipe(
-    ofType(ActionType.FETCH_TECHNOLOGIES),
+    ofType(ActionType.FETCH_TECHNOLOGY),
     mergeMap(({ id }: any) => {
-      return from(Service.request(Technologie.find, { id })).pipe(
-        map((response: any) => fetchTechnologieFullFilled(response)),
+      return from(Service.request(Technology.find, { id })).pipe(
+        map((response: any) => fetchTechnologyFullFilled(response)),
       );
     }),
   );
 };
 
-const fetchTechnologieHeaderEpic = (
+const fetchTechnologyHeaderEpic = (
   action$: ActionsObservable<any>,
   state$: StateObservable<any>,
   { Service }: { Service: ServiceInterface },
 ) => {
   return action$.pipe(
-    ofType(ActionType.FETCH_TECHNOLOGIES_HEADER),
+    ofType(ActionType.FETCH_TECHNOLOGY_HEADER),
     mergeMap(() => {
-      return from(Service.request(TechnologieHeader.find)).pipe(
+      return from(Service.request(TechnologyHeader.find)).pipe(
         map((response: any) => fetchHeaderFullFilled(response)),
       );
     }),
   );
 };
 
-const updateTechnologieHeaderEpic = (
+const updateTechnologyHeaderEpic = (
   action$: ActionsObservable<any>,
   state$: StateObservable<any>,
   { Service }: { Service: ServiceInterface },
 ) => {
   return action$.pipe(
-    ofType(ActionType.UPDATE_TECHNOLOGIES_HEADER),
+    ofType(ActionType.UPDATE_TECHNOLOGY_HEADER),
     mergeMap(({ data }: { data: object }) => {
-      return from(Service.request(TechnologieHeader.update, {}, data)).pipe(
+      return from(Service.request(TechnologyHeader.update, {}, data)).pipe(
         mergeMap(() => {
           return concat(
             of(redirectAfterCreation(true)),
@@ -148,10 +148,10 @@ const updateTechnologieHeaderEpic = (
 
 export default {
   fetchTechnologiesEpic,
-  createTechnologieEpic,
-  fetchTechnologieEpic,
-  updateTechnologieEpic,
-  removeTechnologieEpic,
-  fetchTechnologieHeaderEpic,
-  updateTechnologieHeaderEpic,
+  createTechnologyEpic,
+  fetchTechnologyEpic,
+  updateTechnologyEpic,
+  removeTechnologyEpic,
+  fetchTechnologyHeaderEpic,
+  updateTechnologyHeaderEpic,
 };

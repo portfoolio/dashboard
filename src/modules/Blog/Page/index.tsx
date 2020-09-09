@@ -18,7 +18,7 @@ export default (): ReactElement => {
             route: formatRoute(HomeRoutes.HOME),
           },
           {
-            title: 'Testimonial',
+            title: 'Blog',
             route: formatRoute(HeaderRoutes.HEADER),
           },
         ]

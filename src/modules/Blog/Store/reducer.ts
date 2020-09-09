@@ -1,13 +1,17 @@
 import { ActionType } from './types';
 
 const initialState = {
-  testimonials: [],
+  blogs: [],
   currentItem: {
-    comment: '',
-    author: '',
+    title: '',
+    description: '',
+    thumbnail: '',
+    image: '',
+    content: '',
   },
   header: {
     title: '',
+    description: '',
   },
   shouldRedirect: false,
 };
@@ -17,27 +21,27 @@ export default (
   action: any,
 ): object => {
   switch (action.type) {
-    case ActionType.FETCH_TESTIMONIALS:
-    case ActionType.FETCH_TESTIMONIAL:
-    case ActionType.FETCH_TESTIMONIAL_FULFILLED:
-      const testimonial = action.testimonial || initialState.currentItem;
-      return { ...state, currentItem: testimonial };
+    case ActionType.FETCH_BLOGS:
+    case ActionType.FETCH_BLOG:
+    case ActionType.FETCH_BLOG_FULFILLED:
+      const blog = action.blog || initialState.currentItem;
+      return { ...state, currentItem: blog };
 
-    case ActionType.REMOVE_TESTIMONIAL:
+    case ActionType.REMOVE_BLOG:
       return { ...state };
 
-    case ActionType.FETCH_TESTIMONIALS_FULFILLED:
-      const testimonials = action.testimonials || [];
-      return { ...state, testimonials };
+    case ActionType.FETCH_BLOGS_FULFILLED:
+      const blogs = action.blogs || [];
+      return { ...state, blogs };
 
-    case ActionType.CREATE_TESTIMONIAL:
+    case ActionType.CREATE_BLOG:
       return { ...state };
 
     case ActionType.REDIRECT_AFTER_CREATION:
       return { ...state, shouldRedirect: action.shouldRedirect };
 
-    case ActionType.FETCH_TESTIMONIAL_HEADER:
-    case ActionType.FETCH_TESTIMONIAL_HEADER_FUL_FILLED:
+    case ActionType.FETCH_BLOG_HEADER:
+    case ActionType.FETCH_BLOG_HEADER_FUL_FILLED:
       const header = action.header || initialState.header;
       return { ...state, header };
 

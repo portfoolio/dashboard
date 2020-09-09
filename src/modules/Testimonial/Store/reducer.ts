@@ -1,15 +1,13 @@
 import { ActionType } from './types';
 
 const initialState = {
-  projects: [],
+  testimonials: [],
   currentItem: {
-    title: '',
-    subtitle: '',
-    image: '',
+    comment: '',
+    author: '',
   },
   header: {
     title: '',
-    description: '',
   },
   shouldRedirect: false,
 };
@@ -19,27 +17,27 @@ export default (
   action: any,
 ): object => {
   switch (action.type) {
-    case ActionType.FETCH_PROJECTS:
-    case ActionType.FETCH_PROJECT:
-    case ActionType.FETCH_PROJECT_FULFILLED:
-      const project = action.project || initialState.currentItem;
-      return { ...state, currentItem: project };
+    case ActionType.FETCH_TESTIMONIALS:
+    case ActionType.FETCH_TESTIMONIAL:
+    case ActionType.FETCH_TESTIMONIAL_FULFILLED:
+      const testimonial = action.testimonial || initialState.currentItem;
+      return { ...state, currentItem: testimonial };
 
-    case ActionType.REMOVE_PROJECT:
+    case ActionType.REMOVE_TESTIMONIAL:
       return { ...state };
 
-    case ActionType.FETCH_PROJECTS_FULFILLED:
-      const projects = action.projects || [];
-      return { ...state, projects };
+    case ActionType.FETCH_TESTIMONIALS_FULFILLED:
+      const testimonials = action.testimonials || [];
+      return { ...state, testimonials };
 
-    case ActionType.CREATE_PROJECT:
+    case ActionType.CREATE_TESTIMONIAL:
       return { ...state };
 
     case ActionType.REDIRECT_AFTER_CREATION:
       return { ...state, shouldRedirect: action.shouldRedirect };
 
-    case ActionType.FETCH_PROJECT_HEADER:
-    case ActionType.FETCH_PROJECT_HEADER_FUL_FILLED:
+    case ActionType.FETCH_TESTIMONIAL_HEADER:
+    case ActionType.FETCH_TESTIMONIAL_HEADER_FUL_FILLED:
       const header = action.header || initialState.header;
       return { ...state, header };
 

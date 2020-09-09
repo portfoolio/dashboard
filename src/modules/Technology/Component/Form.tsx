@@ -1,66 +1,58 @@
-import React, { ReactElement, useCallback, useEffect } from 'react';
+import React, { ReactElement, useCallback, useEffect, useState } from 'react';
 import { withRouter } from 'react-router';
 import { useSelector, useDispatch } from 'react-redux';
-import Form, { Field } from '@atlaskit/form';
-import TextField from '@atlaskit/textfield';
-import TextArea from '@atlaskit/textarea';
+import Form from '@atlaskit/form';
 
-import { Route as TechnologieRoutes } from 'modules/Technologie/Router/types';
+import { Route as TechnologyRoutes } from 'modules/Technology/Router/types';
 import ButtonBack from 'modules/Core/Component/Form/ButtonBack';
 import FormFooter from 'modules/Core/Component/Form/Footer';
 import { prepareFormData } from 'util/helper';
-import { createTechnologie, fetchTechnologie, updateTechnologie } from 'modules/Technologie/Store/actions';
+import { createTechnology, fetchTechnology, updateTechnology } from 'modules/Technology/Store/actions';
+import FormImageInput from 'modules/Core/Component/Form/ImageInput';
 
 export default withRouter(({ history, match }: any): ReactElement => {
-  const { currentItem: technologie, shouldRedirect }: any = useSelector((state: any) => state.technologie);
+  const { currentItem: technology, shouldRedirect }: any = useSelector((state: any) => state.technology);
 
   if (shouldRedirect) {
-    history.push(TechnologieRoutes.LIST);
+    history.push(TechnologyRoutes.LIST);
   }
 
+  const [image, setImage]: any = useState(null);
   const dispatch = useDispatch();
   const stableDispatch = useCallback(dispatch, []);
   const updateForm = useCallback((data) => {
     if (match.params.id) {
-      stableDispatch(updateTechnologie({ id: match.params.id, ...data }));
+      stableDispatch(updateTechnology({ id: match.params.id, ...data }));
       return;
     }
 
-    stableDispatch(createTechnologie(data));
+    stableDispatch(createTechnology(data));
   }, [stableDispatch, match.params.id])
 
   useEffect(() => {
     if (match.params.id) {
-      stableDispatch(fetchTechnologie(match.params.id));
+      stableDispatch(fetchTechnology(match.params.id));
     }
   }, [stableDispatch, match.params.id]);
 
   return (
     <section>
-      <ButtonBack path={TechnologieRoutes.LIST} titleBefore={'Technologie Form'} />
+      <ButtonBack path={TechnologyRoutes.LIST} titleBefore={'Technology Form'} />
       <Form
-        onSubmit={(data: { data: object }) => updateForm(prepareFormData(data))}>
+        onSubmit={(data: { data: object }) => updateForm(prepareFormData(data, { image }))}>
         {
           ({ formProps }: { formProps: object }) => (
-            <form {...formProps} name={'technologie'}>
+            <form {...formProps} name={'technology'}>
 
-              <Field
-                name={'comment'}
-                defaultValue={technologie.comment}
-                isRequired={true}
-                label={'Comment'}
-              >
-                {({ fieldProps }: { fieldProps: any }) => <TextArea
-                  placeholder={'Comment'}
-                  style={{ height: 200 }}
-                  {...fieldProps}
-                />
-                }
-              </Field>
-
-              <Field name={'author'} defaultValue={technologie.author} isRequired={true} label={'Author'}>
-                {({ fieldProps }: { fieldProps: any }) => <TextField placeholder={'Author'} {...fieldProps} />}
-              </Field>
+              <FormImageInput
+                form={'project'}
+                fieldName={'image'}
+                isLabelHidden
+                fieldValue={technology.image}
+                value={technology.image}
+                fieldLabel={'Image'}
+                imageSelected={setImage}
+              />
 
               <FormFooter />
             </form>

@@ -1,35 +1,35 @@
 import { ActionType } from './types';
 
-export function fetchProjects() {
+export function fetchTestimonials() {
   return {
-    type: ActionType.FETCH_PROJECTS,
+    type: ActionType.FETCH_TESTIMONIALS,
   };
 }
 
-export function fetchProjectsFullFilled(projects: [] = []) {
+export function fetchTestimonialsFullFilled(testimonials: [] = []) {
   return {
-    type: ActionType.FETCH_PROJECTS_FULFILLED,
-    projects,
+    type: ActionType.FETCH_TESTIMONIALS_FULFILLED,
+    testimonials,
   };
 }
 
-export function fetchProjectFullFilled(project: object) {
+export function fetchTestimonialFullFilled(testimonial: object) {
   return {
-    type: ActionType.FETCH_PROJECT_FULFILLED,
-    project,
+    type: ActionType.FETCH_TESTIMONIAL_FULFILLED,
+    testimonial,
   };
 }
 
-export function fetchProject(id: string) {
+export function fetchTestimonial(id: string) {
   return {
-    type: ActionType.FETCH_PROJECT,
+    type: ActionType.FETCH_TESTIMONIAL,
     id,
   };
 }
 
-export function createProject(data: object) {
+export function createTestimonial(data: object) {
   return {
-    type: ActionType.CREATE_PROJECT,
+    type: ActionType.CREATE_TESTIMONIAL,
     data,
   };
 }
@@ -41,36 +41,36 @@ export function redirectAfterCreation(shouldRedirect: boolean) {
   };
 }
 
-export function updateProject(data: object) {
+export function updateTestimonial(data: object) {
   return {
-    type: ActionType.UPDATE_PROJECT,
+    type: ActionType.UPDATE_TESTIMONIAL,
     data,
   };
 }
 
-export function removeProject(id: string) {
+export function removeTestimonial(id: string) {
   return {
-    type: ActionType.REMOVE_PROJECT,
+    type: ActionType.REMOVE_TESTIMONIAL,
     id,
   };
 }
 
 export function fetchHeader() {
   return {
-    type: ActionType.FETCH_PROJECT_HEADER,
+    type: ActionType.FETCH_TESTIMONIAL_HEADER,
   }
 }
 
 export function fetchHeaderFullFilled(header: object) {
   return {
-    type: ActionType.FETCH_PROJECT_HEADER_FUL_FILLED,
+    type: ActionType.FETCH_TESTIMONIAL_HEADER_FUL_FILLED,
     header,
   };
 }
 
 export function updateHeader(data: object) {
   return {
-    type: ActionType.UPDATE_PROJECT_HEADER,
+    type: ActionType.UPDATE_TESTIMONIAL_HEADER,
     data
   }
 }

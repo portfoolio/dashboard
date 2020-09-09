@@ -4,8 +4,8 @@ import { formatRoute } from 'react-router-named-routes';
 import LayoutWrapper from 'modules/Core/Component/Layout/Wrapper';
 import LayoutTitle from 'modules/Core/Component/Layout/Title';
 import { Route as HomeRoutes } from 'modules/Home/Router/types';
-import { Route as TestimonialRoutes } from '../Router/types';
-import Form from 'modules/Testimonial/Component/Form';
+import { Route as BlogRoutes } from '../Router/types';
+import Form from 'modules/Blog/Component/Form';
 
 export default (): ReactElement => {
   return (
@@ -17,12 +17,12 @@ export default (): ReactElement => {
             route: formatRoute(HomeRoutes.HOME),
           },
           {
-            title: 'Testimonial',
-            route: formatRoute(TestimonialRoutes.LIST),
+            title: 'Blog',
+            route: formatRoute(BlogRoutes.LIST),
           },
           {
             title: 'Create',
-            route: formatRoute(TestimonialRoutes.CREATE),
+            route: formatRoute(BlogRoutes.CREATE),
           },
         ]
       }

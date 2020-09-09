@@ -4,47 +4,44 @@ import ArrowLeftIcon from '@atlaskit/icon/glyph/arrow-left';
 import ArrowRightIcon from '@atlaskit/icon/glyph/arrow-right';
 import AddItemIcon from '@atlaskit/icon/glyph/add-item';
 import EditorHorizontalRuleIcon from '@atlaskit/icon/glyph/editor/horizontal-rule';
-import BitbucketPipelinesIcon from '@atlaskit/icon/glyph/bitbucket/pipelines';
+import CommentIcon from '@atlaskit/icon/glyph/comment';
 import { Item } from '@atlaskit/navigation-next';
 
 import { NestableWrapper } from 'modules/Core/Component/Layout/Sidebar/Nestable/Wrapper';
-import { Route as JourneyRoute } from 'modules/Journey/Router/types';
+import { Route as TestimonialRoute } from 'modules/Testimonial/Router/types';
 
 const nestedLevels = [
   {
-    id: 'journey',
+    id: 'testimonial',
     items: [
       {
-        text: 'Journey',
-        before: BitbucketPipelinesIcon,
+        text: 'Testimonial',
+        before: CommentIcon,
         after: ArrowRightIcon,
         goTo: 1,
-        subText: 'Your journey',
+        subText: 'Testimonial section',
       },
     ],
   },
   {
-    parentId: 'journey',
-    id: 'journey-2',
+    parentId: 'testimonial',
+    id: 'testimonial-2',
     items: [
       { text: 'Go Back', before: ArrowLeftIcon, goTo: 0 },
-      { text: 'Header', before: EditorHorizontalRuleIcon, goTo: JourneyRoute.HEADER },
-      { text: 'Items', before: AddItemIcon, goTo: JourneyRoute.LIST },
+      { text: 'Header', before: EditorHorizontalRuleIcon, goTo: TestimonialRoute.HEADER },
+      { text: 'Items', before: AddItemIcon, goTo: TestimonialRoute.LIST },
     ],
   },
 ];
 
 const expandRoutes = [
-  JourneyRoute.LIST,
-  JourneyRoute.CREATE,
-  JourneyRoute.EDIT,
-  JourneyRoute.HEADER,
-  JourneyRoute.ITEM_LIST,
-  JourneyRoute.EDIT_ITEM,
-  JourneyRoute.CREATE_ITEM,
+  TestimonialRoute.LIST,
+  TestimonialRoute.CREATE,
+  TestimonialRoute.EDIT,
+  TestimonialRoute.HEADER,
 ];
 
-export const NestableJourney = withRouter(({ location, history }: any): ReactElement => {
+export const NestableTestimonial = withRouter(({ location, history }: any): ReactElement => {
   const shouldExpand = expandRoutes.includes(location.pathname)
   let [activeLevel, setActiveLevel] = useState(shouldExpand ? 1 : 0);
 

@@ -1,14 +1,19 @@
-import React, { ReactElement, useCallback, useEffect } from 'react';
+import React, { ReactElement, ReactNode, useCallback, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { formatRoute } from 'react-router-named-routes';
+import Avatar, { AvatarItem } from '@atlaskit/avatar';
 
 import LayoutWrapper from 'modules/Core/Component/Layout/Wrapper';
 import LayoutTitle from 'modules/Core/Component/Layout/Title';
 import { Route as HomeRoutes } from 'modules/Home/Router/types';
-import { Route as TestimonialRoute } from 'modules/Testimonial/Router/types';
+import { Route as BlogRoute } from 'modules/Blog/Router/types';
 import ModuleTable from 'modules/Core/Component/Layout/Module/Table';
-import { TableHeadDefinition } from 'modules/Core/Component/Layout/Module/Table/types';
-import { fetchTestimonials, removeTestimonial } from 'modules/Testimonial/Store/actions';
+import {
+  TableHeadDefinition,
+  TableRowDataDefinition,
+  TableRowDataTransformation
+} from 'modules/Core/Component/Layout/Module/Table/types';
+import { fetchBlogs, removeBlog } from 'modules/Blog/Store/actions';
 
 const breadcrumbs: any = [
   {
@@ -16,8 +21,8 @@ const breadcrumbs: any = [
     route: formatRoute(HomeRoutes.HOME),
   },
   {
-    title: 'Testimonial',
-    route: formatRoute(TestimonialRoute.LIST),
+    title: 'Blog',
+    route: formatRoute(BlogRoute.LIST),
   },
 ];
 
@@ -30,30 +35,44 @@ const head: TableHeadDefinition = {
       width: 5,
     },
     {
-      key: 'comment',
-      content: 'Comment',
+      key: 'thumbnail',
+      content: 'Thumbnail',
       isSortable: false,
       width: 25,
     },
     {
-      key: 'author',
-      content: 'Author',
+      key: 'title',
+      content: 'Title',
+      isSortable: false,
+      width: 25,
+    },
+    {
+      key: 'description',
+      content: 'Description',
       isSortable: false,
       width: 25,
     },
   ],
 };
 
+const dataTransformation: TableRowDataTransformation = {
+  thumbnail: ({ thumbnail }: TableRowDataDefinition & {
+    thumbnail: string,
+  }): ReactNode => (
+    <AvatarItem style={{ display: 'flex', justifyContent: 'center' }} avatar={<Avatar src={thumbnail} />} />
+  ),
+};
+
 export default (): ReactElement => {
-  const { testimonials }: any = useSelector((state: any) => state.testimonial);
+  const { blogs }: any = useSelector((state: any) => state.blog);
   const dispatch = useDispatch();
   const stableDispatch = useCallback(dispatch, []);
 
   useEffect(() => {
-    stableDispatch(fetchTestimonials());
+    stableDispatch(fetchBlogs());
   }, [stableDispatch]);
 
-  const remove = useCallback((id: string) => stableDispatch(removeTestimonial(id)), [stableDispatch]);
+  const remove = useCallback((id: string) => stableDispatch(removeBlog(id)), [stableDispatch]);
 
   return (
     <LayoutWrapper>
@@ -61,12 +80,13 @@ export default (): ReactElement => {
       <section>
         {
           <ModuleTable
-            title='Testimonial'
+            title='Blog'
             head={head}
-            data={testimonials}
+            data={blogs}
             showActions={true}
-            creationRoute={TestimonialRoute.CREATE}
-            modificationRoute={(id: string): string => formatRoute(TestimonialRoute.EDIT, { id })}
+            creationRoute={BlogRoute.CREATE}
+            dataTransformation={dataTransformation}
+            modificationRoute={(id: string): string => formatRoute(BlogRoute.EDIT, { id })}
             onDeleteConfirmed={(id: string): any => remove(id)}
           />
         }

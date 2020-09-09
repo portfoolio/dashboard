@@ -19,6 +19,7 @@ const nestedLevels = [
         before: StarFilledIcon,
         after: ArrowRightIcon,
         goTo: 1,
+        subText: 'Project section',
       },
     ],
   },

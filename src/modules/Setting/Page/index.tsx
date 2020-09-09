@@ -5,8 +5,8 @@ import LayoutWrapper from 'modules/Core/Component/Layout/Wrapper';
 import LayoutTitle from 'modules/Core/Component/Layout/Title';
 
 import { Route as HomeRoutes } from 'modules/Home/Router/types';
-import { Route as HeaderRoutes } from 'modules/Header/Router/types';
-import HeaderForm from 'modules/Header/Component/Form';
+import { Route as SettingRoutes } from 'modules/Setting/Router/types';
+import Form from 'modules/Setting/Component/Form';
 
 export default (): ReactElement => {
   return (
@@ -18,14 +18,14 @@ export default (): ReactElement => {
             route: formatRoute(HomeRoutes.HOME),
           },
           {
-            title: 'Technology',
-            route: formatRoute(HeaderRoutes.HEADER),
+            title: 'Setting',
+            route: formatRoute(SettingRoutes.SETTING),
           },
         ]
       }>
       </LayoutTitle>
       <section>
-        <HeaderForm />
+        <Form />
       </section>
     </LayoutWrapper>
   );

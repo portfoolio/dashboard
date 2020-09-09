@@ -17,27 +17,27 @@ export default (
   action: any,
 ): object => {
   switch (action.type) {
-    case ActionType.FETCH_TECHNOLOGIESS:
     case ActionType.FETCH_TECHNOLOGIES:
-    case ActionType.FETCH_TECHNOLOGIES_FULFILLED:
-      const technologie = action.technologie || initialState.currentItem;
-      return { ...state, currentItem: technologie };
+    case ActionType.FETCH_TECHNOLOGY:
+    case ActionType.FETCH_TECHNOLOGY_FULFILLED:
+      const technology = action.technology || initialState.currentItem;
+      return { ...state, currentItem: technology };
 
-    case ActionType.REMOVE_TECHNOLOGIES:
+    case ActionType.REMOVE_TECHNOLOGY:
       return { ...state };
 
-    case ActionType.FETCH_TECHNOLOGIESS_FULFILLED:
+    case ActionType.FETCH_TECHNOLOGIES_FULFILLED:
       const technologies = action.technologies || [];
       return { ...state, technologies };
 
-    case ActionType.CREATE_TECHNOLOGIES:
+    case ActionType.CREATE_TECHNOLOGY:
       return { ...state };
 
     case ActionType.REDIRECT_AFTER_CREATION:
       return { ...state, shouldRedirect: action.shouldRedirect };
 
-    case ActionType.FETCH_TECHNOLOGIES_HEADER:
-    case ActionType.FETCH_TECHNOLOGIES_HEADER_FUL_FILLED:
+    case ActionType.FETCH_TECHNOLOGY_HEADER:
+    case ActionType.FETCH_TECHNOLOGY_HEADER_FUL_FILLED:
       const header = action.header || initialState.header;
       return { ...state, header };
 

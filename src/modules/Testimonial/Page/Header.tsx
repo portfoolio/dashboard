@@ -5,8 +5,8 @@ import LayoutWrapper from 'modules/Core/Component/Layout/Wrapper';
 import LayoutTitle from 'modules/Core/Component/Layout/Title';
 
 import { Route as HomeRoutes } from 'modules/Home/Router/types';
-import { Route as ProjectRoutes } from 'modules/Project/Router/types';
-import HeaderForm from 'modules/Project/Component/HeaderForm';
+import { Route as TestimonialRoutes } from 'modules/Testimonial/Router/types';
+import HeaderForm from 'modules/Testimonial/Component/HeaderForm';
 
 export default (): ReactElement => {
   return (
@@ -19,7 +19,7 @@ export default (): ReactElement => {
           },
           {
             title: 'Header',
-            route: formatRoute(ProjectRoutes.HEADER),
+            route: formatRoute(TestimonialRoutes.HEADER),
           },
         ]
       }>

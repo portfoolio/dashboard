@@ -1,11 +1,10 @@
-import { createStore, applyMiddleware, compose, ReducersMapObject } from 'redux';
+import { createStore, applyMiddleware, compose, combineReducers } from 'redux';
 import { combineEpics, createEpicMiddleware } from 'redux-observable';
 import { throttle, camelCase } from 'lodash';
-import storage from 'util/storage';
-import { combineReducers } from 'redux';
 import Service from 'util/Service';
+import storage from 'util/storage';
 
-let reducers: ReducersMapObject<any, any> = {};
+let reducers: any = {};
 let epics: any = [];
 
 const reducerContext = require.context('./modules', true, /Store\/reducer\.ts$/);

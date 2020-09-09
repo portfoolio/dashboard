@@ -1,35 +1,35 @@
 import { ActionType } from './types';
 
-export function fetchTestimonials() {
+export function fetchBlogs() {
   return {
-    type: ActionType.FETCH_TESTIMONIALS,
+    type: ActionType.FETCH_BLOGS,
   };
 }
 
-export function fetchTestimonialsFullFilled(testimonials: [] = []) {
+export function fetchBlogsFullFilled(blogs: [] = []) {
   return {
-    type: ActionType.FETCH_TESTIMONIALS_FULFILLED,
-    testimonials,
+    type: ActionType.FETCH_BLOGS_FULFILLED,
+    blogs,
   };
 }
 
-export function fetchTestimonialFullFilled(testimonial: object) {
+export function fetchBlogFullFilled(blog: object) {
   return {
-    type: ActionType.FETCH_TESTIMONIAL_FULFILLED,
-    testimonial,
+    type: ActionType.FETCH_BLOG_FULFILLED,
+    blog,
   };
 }
 
-export function fetchTestimonial(id: string) {
+export function fetchBlog(id: string) {
   return {
-    type: ActionType.FETCH_TESTIMONIAL,
+    type: ActionType.FETCH_BLOG,
     id,
   };
 }
 
-export function createTestimonial(data: object) {
+export function createBlog(data: object) {
   return {
-    type: ActionType.CREATE_TESTIMONIAL,
+    type: ActionType.CREATE_BLOG,
     data,
   };
 }
@@ -41,36 +41,36 @@ export function redirectAfterCreation(shouldRedirect: boolean) {
   };
 }
 
-export function updateTestimonial(data: object) {
+export function updateBlog(data: object) {
   return {
-    type: ActionType.UPDATE_TESTIMONIAL,
+    type: ActionType.UPDATE_BLOG,
     data,
   };
 }
 
-export function removeTestimonial(id: string) {
+export function removeBlog(id: string) {
   return {
-    type: ActionType.REMOVE_TESTIMONIAL,
+    type: ActionType.REMOVE_BLOG,
     id,
   };
 }
 
 export function fetchHeader() {
   return {
-    type: ActionType.FETCH_TESTIMONIAL_HEADER,
+    type: ActionType.FETCH_BLOG_HEADER,
   }
 }
 
 export function fetchHeaderFullFilled(header: object) {
   return {
-    type: ActionType.FETCH_TESTIMONIAL_HEADER_FUL_FILLED,
+    type: ActionType.FETCH_BLOG_HEADER_FUL_FILLED,
     header,
   };
 }
 
 export function updateHeader(data: object) {
   return {
-    type: ActionType.UPDATE_TESTIMONIAL_HEADER,
+    type: ActionType.UPDATE_BLOG_HEADER,
     data
   }
 }

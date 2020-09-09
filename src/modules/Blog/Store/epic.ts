@@ -5,27 +5,27 @@ import { ServiceInterface } from 'util/Service';
 import { ActionType } from './types';
 import {
   fetchHeaderFullFilled,
-  fetchTestimonialFullFilled,
-  fetchTestimonials,
-  fetchTestimonialsFullFilled,
+  fetchBlogFullFilled,
+  fetchBlogs,
+  fetchBlogsFullFilled,
   redirectAfterCreation,
 } from './actions';
-import { Testimonial, TestimonialHeader } from 'common/api';
+import { Blog, BlogHeader } from 'common/api';
 import { showNotification } from 'modules/Core/Store/actions';
 
-const fetchTestimonialsEpic = (
+const fetchBlogsEpic = (
   action$: ActionsObservable<any>,
   state$: StateObservable<any>,
   { Service }: { Service: ServiceInterface },
 ) => {
   return action$.pipe(
-    ofType(ActionType.FETCH_TESTIMONIALS),
+    ofType(ActionType.FETCH_BLOGS),
     mergeMap(() => {
-      return from(Service.request(Testimonial.list)).pipe(
+      return from(Service.request(Blog.list)).pipe(
         mergeMap((response: any) => {
             return concat(
               of(redirectAfterCreation(false)),
-              of(fetchTestimonialsFullFilled(response)),
+              of(fetchBlogsFullFilled(response)),
             );
           },
         ),
@@ -34,19 +34,19 @@ const fetchTestimonialsEpic = (
   );
 };
 
-const createTestimonialEpic = (
+const createBlogEpic = (
   action$: ActionsObservable<any>,
   state$: StateObservable<any>,
   { Service }: { Service: ServiceInterface },
 ) => {
   return action$.pipe(
-    ofType(ActionType.CREATE_TESTIMONIAL),
+    ofType(ActionType.CREATE_BLOG),
     mergeMap(({ data }: { data: object }) => {
-      return from(Service.request(Testimonial.create, {}, data)).pipe(
+      return from(Service.request(Blog.create, {}, data)).pipe(
         mergeMap(() => {
           return concat(
             of(redirectAfterCreation(true)),
-            of(showNotification('Testimonial successfully created.')),
+            of(showNotification('Blog successfully created.')),
           );
         }),
       );
@@ -54,19 +54,19 @@ const createTestimonialEpic = (
   );
 };
 
-const removeTestimonialEpic = (
+const removeBlogEpic = (
   action$: ActionsObservable<any>,
   state$: StateObservable<any>,
   { Service }: { Service: ServiceInterface },
 ) => {
   return action$.pipe(
-    ofType(ActionType.REMOVE_TESTIMONIAL),
+    ofType(ActionType.REMOVE_BLOG),
     mergeMap(({ id }: any) => {
-      return from(Service.request(Testimonial.delete, { id })).pipe(
+      return from(Service.request(Blog.delete, { id })).pipe(
         mergeMap(() => {
           return concat(
-            of(fetchTestimonials()),
-            of(showNotification('Testimonial successfully removed.')),
+            of(fetchBlogs()),
+            of(showNotification('Blog successfully removed.')),
           );
         }),
       );
@@ -74,20 +74,20 @@ const removeTestimonialEpic = (
   );
 };
 
-const updateTestimonialEpic = (
+const updateBlogEpic = (
   action$: ActionsObservable<any>,
   state$: StateObservable<any>,
   { Service }: { Service: ServiceInterface },
 ) => {
   return action$.pipe(
-    ofType(ActionType.UPDATE_TESTIMONIAL),
+    ofType(ActionType.UPDATE_BLOG),
     mergeMap(({ data }: { data: object }) => {
-      return from(Service.request(Testimonial.update, {}, data)).pipe(
+      return from(Service.request(Blog.update, {}, data)).pipe(
         mergeMap(() => {
           return concat(
             of(redirectAfterCreation(true)),
-            of(fetchTestimonials()),
-            of(showNotification('Testimonial successfully updated.')),
+            of(fetchBlogs()),
+            of(showNotification('Blog successfully updated.')),
           );
         }),
       );
@@ -95,49 +95,49 @@ const updateTestimonialEpic = (
   );
 };
 
-const fetchTestimonialEpic = (
+const fetchBlogEpic = (
   action$: ActionsObservable<any>,
   state$: StateObservable<any>,
   { Service }: { Service: ServiceInterface },
 ) => {
   return action$.pipe(
-    ofType(ActionType.FETCH_TESTIMONIAL),
+    ofType(ActionType.FETCH_BLOG),
     mergeMap(({ id }: any) => {
-      return from(Service.request(Testimonial.find, { id })).pipe(
-        map((response: any) => fetchTestimonialFullFilled(response)),
+      return from(Service.request(Blog.find, { id })).pipe(
+        map((response: any) => fetchBlogFullFilled(response)),
       );
     }),
   );
 };
 
-const fetchTestimonialHeaderEpic = (
+const fetchBlogHeaderEpic = (
   action$: ActionsObservable<any>,
   state$: StateObservable<any>,
   { Service }: { Service: ServiceInterface },
 ) => {
   return action$.pipe(
-    ofType(ActionType.FETCH_TESTIMONIAL_HEADER),
+    ofType(ActionType.FETCH_BLOG_HEADER),
     mergeMap(() => {
-      return from(Service.request(TestimonialHeader.find)).pipe(
+      return from(Service.request(BlogHeader.find)).pipe(
         map((response: any) => fetchHeaderFullFilled(response)),
       );
     }),
   );
 };
 
-const updateTestimonialHeaderEpic = (
+const updateBlogHeaderEpic = (
   action$: ActionsObservable<any>,
   state$: StateObservable<any>,
   { Service }: { Service: ServiceInterface },
 ) => {
   return action$.pipe(
-    ofType(ActionType.UPDATE_TESTIMONIAL_HEADER),
+    ofType(ActionType.UPDATE_BLOG_HEADER),
     mergeMap(({ data }: { data: object }) => {
-      return from(Service.request(TestimonialHeader.update, {}, data)).pipe(
+      return from(Service.request(BlogHeader.update, {}, data)).pipe(
         mergeMap(() => {
           return concat(
             of(redirectAfterCreation(true)),
-            of(fetchTestimonials()),
+            of(fetchBlogs()),
             of(showNotification('Header successfully updated.')),
           );
         }),
@@ -147,11 +147,11 @@ const updateTestimonialHeaderEpic = (
 };
 
 export default {
-  fetchTestimonialsEpic,
-  createTestimonialEpic,
-  fetchTestimonialEpic,
-  updateTestimonialEpic,
-  removeTestimonialEpic,
-  fetchTestimonialHeaderEpic,
-  updateTestimonialHeaderEpic,
+  fetchBlogsEpic,
+  createBlogEpic,
+  fetchBlogEpic,
+  updateBlogEpic,
+  removeBlogEpic,
+  fetchBlogHeaderEpic,
+  updateBlogHeaderEpic,
 };
