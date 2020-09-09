@@ -1,14 +1,19 @@
-import React, { ReactElement, useCallback, useEffect } from 'react';
+import React, { ReactElement, ReactNode, useCallback, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { formatRoute } from 'react-router-named-routes';
+import Avatar, { AvatarItem } from '@atlaskit/avatar';
 
 import LayoutWrapper from 'modules/Core/Component/Layout/Wrapper';
 import LayoutTitle from 'modules/Core/Component/Layout/Title';
 import { Route as HomeRoutes } from 'modules/Home/Router/types';
-import { Route as TechnologieRoute } from 'modules/Technologie/Router/types';
+import { Route as TechnologyRoute } from 'modules/Technology/Router/types';
 import ModuleTable from 'modules/Core/Component/Layout/Module/Table';
-import { TableHeadDefinition } from 'modules/Core/Component/Layout/Module/Table/types';
-import { fetchTechnologies, removeTechnologie } from 'modules/Technologie/Store/actions';
+import {
+  TableHeadDefinition,
+  TableRowDataDefinition,
+  TableRowDataTransformation
+} from 'modules/Core/Component/Layout/Module/Table/types';
+import { fetchTechnologies, removeTechnology } from 'modules/Technology/Store/actions';
 
 const breadcrumbs: any = [
   {
@@ -16,8 +21,8 @@ const breadcrumbs: any = [
     route: formatRoute(HomeRoutes.HOME),
   },
   {
-    title: 'Technologie',
-    route: formatRoute(TechnologieRoute.LIST),
+    title: 'Technology',
+    route: formatRoute(TechnologyRoute.LIST),
   },
 ];
 
@@ -30,22 +35,24 @@ const head: TableHeadDefinition = {
       width: 5,
     },
     {
-      key: 'comment',
-      content: 'Comment',
-      isSortable: false,
-      width: 25,
-    },
-    {
-      key: 'author',
-      content: 'Author',
+      key: 'image',
+      content: 'Image',
       isSortable: false,
       width: 25,
     },
   ],
 };
 
+const dataTransformation: TableRowDataTransformation = {
+  image: ({ image }: TableRowDataDefinition & {
+    image: string,
+  }): ReactNode => (
+    <AvatarItem style={{ display: 'flex', justifyContent: 'center' }} avatar={<Avatar src={image} />} />
+  ),
+};
+
 export default (): ReactElement => {
-  const { technologies }: any = useSelector((state: any) => state.technologie);
+  const { technologies }: any = useSelector((state: any) => state.technology);
   const dispatch = useDispatch();
   const stableDispatch = useCallback(dispatch, []);
 
@@ -53,7 +60,7 @@ export default (): ReactElement => {
     stableDispatch(fetchTechnologies());
   }, [stableDispatch]);
 
-  const remove = useCallback((id: string) => stableDispatch(removeTechnologie(id)), [stableDispatch]);
+  const remove = useCallback((id: string) => stableDispatch(removeTechnology(id)), [stableDispatch]);
 
   return (
     <LayoutWrapper>
@@ -61,12 +68,13 @@ export default (): ReactElement => {
       <section>
         {
           <ModuleTable
-            title='Technologie'
+            title='Technology'
             head={head}
             data={technologies}
             showActions={true}
-            creationRoute={TechnologieRoute.CREATE}
-            modificationRoute={(id: string): string => formatRoute(TechnologieRoute.EDIT, { id })}
+            dataTransformation={dataTransformation}
+            creationRoute={TechnologyRoute.CREATE}
+            modificationRoute={(id: string): string => formatRoute(TechnologyRoute.EDIT, { id })}
             onDeleteConfirmed={(id: string): any => remove(id)}
           />
         }

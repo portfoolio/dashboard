@@ -2,34 +2,34 @@ import { ActionType } from './types';
 
 export function fetchTechnologies() {
   return {
-    type: ActionType.FETCH_TECHNOLOGIESS,
+    type: ActionType.FETCH_TECHNOLOGIES,
   };
 }
 
 export function fetchTechnologiesFullFilled(technologies: [] = []) {
   return {
-    type: ActionType.FETCH_TECHNOLOGIESS_FULFILLED,
+    type: ActionType.FETCH_TECHNOLOGIES_FULFILLED,
     technologies,
   };
 }
 
-export function fetchTechnologieFullFilled(technologie: object) {
+export function fetchTechnologyFullFilled(technology: object) {
   return {
-    type: ActionType.FETCH_TECHNOLOGIES_FULFILLED,
-    technologie,
+    type: ActionType.FETCH_TECHNOLOGY_FULFILLED,
+    technology,
   };
 }
 
-export function fetchTechnologie(id: string) {
+export function fetchTechnology(id: string) {
   return {
-    type: ActionType.FETCH_TECHNOLOGIES,
+    type: ActionType.FETCH_TECHNOLOGY,
     id,
   };
 }
 
-export function createTechnologie(data: object) {
+export function createTechnology(data: object) {
   return {
-    type: ActionType.CREATE_TECHNOLOGIES,
+    type: ActionType.CREATE_TECHNOLOGY,
     data,
   };
 }
@@ -41,36 +41,36 @@ export function redirectAfterCreation(shouldRedirect: boolean) {
   };
 }
 
-export function updateTechnologie(data: object) {
+export function updateTechnology(data: object) {
   return {
-    type: ActionType.UPDATE_TECHNOLOGIES,
+    type: ActionType.UPDATE_TECHNOLOGY,
     data,
   };
 }
 
-export function removeTechnologie(id: string) {
+export function removeTechnology(id: string) {
   return {
-    type: ActionType.REMOVE_TECHNOLOGIES,
+    type: ActionType.REMOVE_TECHNOLOGY,
     id,
   };
 }
 
 export function fetchHeader() {
   return {
-    type: ActionType.FETCH_TECHNOLOGIES_HEADER,
+    type: ActionType.FETCH_TECHNOLOGY_HEADER,
   }
 }
 
 export function fetchHeaderFullFilled(header: object) {
   return {
-    type: ActionType.FETCH_TECHNOLOGIES_HEADER_FUL_FILLED,
+    type: ActionType.FETCH_TECHNOLOGY_HEADER_FUL_FILLED,
     header,
   };
 }
 
 export function updateHeader(data: object) {
   return {
-    type: ActionType.UPDATE_TECHNOLOGIES_HEADER,
+    type: ActionType.UPDATE_TECHNOLOGY_HEADER,
     data
   }
 }

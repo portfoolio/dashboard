@@ -19,6 +19,7 @@ const nestedLevels = [
         before: BitbucketPipelinesIcon,
         after: ArrowRightIcon,
         goTo: 1,
+        subText: 'Journey section',
       },
     ],
   },

@@ -5,8 +5,8 @@ import { formatRoute } from 'react-router-named-routes';
 import LayoutWrapper from 'modules/Core/Component/Layout/Wrapper';
 import LayoutTitle from 'modules/Core/Component/Layout/Title';
 import { Route as HomeRoutes } from 'modules/Home/Router/types';
-import { Route as TechnologieRoutes } from '../Router/types';
-import Form from 'modules/Technologie/Component/Form';
+import { Route as TechnologyRoutes } from '../Router/types';
+import Form from 'modules/Technology/Component/Form';
 
 export default withRouter((): ReactElement => {
   return (
@@ -18,12 +18,12 @@ export default withRouter((): ReactElement => {
             route: formatRoute(HomeRoutes.HOME),
           },
           {
-            title: 'Technologie',
-            route: formatRoute(TechnologieRoutes.LIST),
+            title: 'Technology',
+            route: formatRoute(TechnologyRoutes.LIST),
           },
           {
             title: 'Edit',
-            route: formatRoute(TechnologieRoutes.EDIT),
+            route: formatRoute(TechnologyRoutes.EDIT),
           },
         ]
       }

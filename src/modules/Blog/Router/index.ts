@@ -2,36 +2,36 @@ import withMetadata from 'util/withMetadata';
 import { Route } from './types';
 import { AppRouteDefinition } from 'modules/Core/types';
 
-import TestimonialList from 'modules/Testimonial/Page/List';
-import TestimonialCreate from 'modules/Testimonial/Page/Create';
-import TestimonialEdit from 'modules/Testimonial/Page/Edit';
-import TestimonialHeader from 'modules/Testimonial/Page/Header';
+import BlogList from 'modules/Blog/Page/List';
+import BlogCreate from 'modules/Blog/Page/Create';
+import BlogEdit from 'modules/Blog/Page/Edit';
+import BlogHeader from 'modules/Blog/Page/Header';
 
 const routes: AppRouteDefinition[] = [
   {
     path: Route.LIST,
-    Component: withMetadata(TestimonialList, {
-      title: 'Testimonial',
+    Component: withMetadata(BlogList, {
+      title: 'Blog',
     }),
     guarded: true,
   },
   {
     path: Route.CREATE,
-    Component: withMetadata(TestimonialCreate, {
-      title: 'Create Testimonial',
+    Component: withMetadata(BlogCreate, {
+      title: 'Create Blog',
     }),
     guarded: true,
   },
   {
     path: Route.EDIT,
-    Component: withMetadata(TestimonialEdit, {
-      title: 'Edit Testimonial',
+    Component: withMetadata(BlogEdit, {
+      title: 'Edit Blog',
     }),
     guarded: true,
   },
   {
     path: Route.HEADER,
-    Component: withMetadata(TestimonialHeader, {
+    Component: withMetadata(BlogHeader, {
       title: 'Header',
     }),
     guarded: true,

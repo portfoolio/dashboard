@@ -13,26 +13,29 @@ import EditorHorizontalRuleIcon from '@atlaskit/icon/glyph/editor/horizontal-rul
 import GraphLineIcon from '@atlaskit/icon/glyph/graph-line';
 import EmojiFrequentIcon from '@atlaskit/icon/glyph/emoji/frequent';
 import VidRaisedHandIcon from '@atlaskit/icon/glyph/vid-raised-hand';
-import EditorBoldIcon from '@atlaskit/icon/glyph/editor/bold';
-import EmailIcon from '@atlaskit/icon/glyph/email';
-import CreditCardIcon from '@atlaskit/icon/glyph/creditcard';
-import ArrowUpIcon from '@atlaskit/icon/glyph/arrow-up';
+// import EmailIcon from '@atlaskit/icon/glyph/email';
+// import ArrowUpIcon from '@atlaskit/icon/glyph/arrow-up';
 import SettingsIcon from '@atlaskit/icon/glyph/settings';
 
 import { uuid4 } from 'util/helper';
+import { Route as HomeRoutes } from 'modules/Home/Router/types';
 import { Route as HeaderRoutes } from 'modules/Header/Router/types';
 import { Route as CounterRoutes } from 'modules/Counter/Router/types';
 import { Route as AboutRoutes } from 'modules/About/Router/types';
+import { Route as SettingRoutes } from 'modules/Setting/Router/types';
 
 import { NestableService } from 'modules/Core/Component/Layout/Sidebar/Nestable/Service';
 import { NestableJourney } from 'modules/Core/Component/Layout/Sidebar/Nestable/Journey';
 import { NestableProject } from 'modules/Core/Component/Layout/Sidebar/Nestable/Project';
+import { NestableTestimonial } from 'modules/Core/Component/Layout/Sidebar/Nestable/Testimonial';
+import { NestableTechnology } from 'modules/Core/Component/Layout/Sidebar/Nestable/Technology';
+import { NestableBlog } from 'modules/Core/Component/Layout/Sidebar/Nestable/Blog';
 
-const SidebarItem = styled.div`
-  margin-top: 5px;
-`;
+const SidebarItem = styled.div`margin-top: 5px;`;
 
-const ContainerNavigation = () => (
+const isSelected = (route: string, location: any) =>  route === location.pathname;
+
+const ContainerNavigation = ({ location }: any) => (
   <>
     <HeaderSection>
       {
@@ -49,22 +52,36 @@ const ContainerNavigation = () => (
           <div style={{ margin: '-32px 0 8px 0' }}>
             <GroupHeading>Dashboard</GroupHeading>
           </div>
-          <Link to={'/'} key={'/'} style={{ textDecoration: 'none' }}>
-            <NavigationItem before={GraphLineIcon} text={'Analytics'} subText={'Analytics of the site'}
+          <Link to={HomeRoutes.HOME} key={'/'} style={{ textDecoration: 'none' }}>
+            <NavigationItem
+              isSelected={isSelected(HomeRoutes.HOME, location)}
+              before={GraphLineIcon}
+              text={'Analytics'}
+              subText={'Analytics of the site'}
             />
           </Link>
 
           <Separator/>
           <GroupHeading>Site</GroupHeading>
-          <Link to={HeaderRoutes.HEADER} key={HeaderRoutes.HEADER} style={{ textDecoration: 'none' }}>
+          <Link
+            to={HeaderRoutes.HEADER}
+            key={HeaderRoutes.HEADER}
+            style={{ textDecoration: 'none' }}
+          >
             <NavigationItem
-              before={EditorHorizontalRuleIcon} text={'Header'} subText={'Site header'}
+              isSelected={isSelected(HeaderRoutes.HEADER, location)}
+              before={EditorHorizontalRuleIcon}
+              text={'Header'}
+              subText={'Site header'}
             />
           </Link>
           <SidebarItem>
             <Link to={CounterRoutes.LIST} key={uuid4()} style={{ textDecoration: 'none' }}>
               <NavigationItem
-                before={EmojiFrequentIcon} text={'Counter'} subText={'Progress bar\'s'}
+                isSelected={isSelected(CounterRoutes.LIST, location)}
+                before={EmojiFrequentIcon}
+                text={'Counter'}
+                subText={'Progress bar\'s'}
               />
             </Link>
           </SidebarItem>
@@ -72,10 +89,15 @@ const ContainerNavigation = () => (
           <SidebarItem>
             <Link to={AboutRoutes.ABOUT} key={uuid4()} style={{ textDecoration: 'none' }}>
               <NavigationItem
-                before={VidRaisedHandIcon} text={'About'} subText={'About section'}
+                isSelected={isSelected(AboutRoutes.ABOUT, location)}
+                before={VidRaisedHandIcon}
+                text={'About'}
+                subText={'About section'}
               />
             </Link>
           </SidebarItem>
+
+          <Separator/>
 
           <NestableService />
 
@@ -83,50 +105,38 @@ const ContainerNavigation = () => (
 
           <NestableProject />
 
-          <SidebarItem>
-            <Link to={'/'} key={uuid4()} style={{ textDecoration: 'none' }}>
-              <NavigationItem
-                before={EditorBoldIcon}
-                text={'Blog'} subText={'Site blog'}
-              />
-            </Link>
-          </SidebarItem>
+          <NestableTestimonial />
 
-          <SidebarItem>
+          <NestableTechnology />
+
+          <NestableBlog />
+
+          {/*<SidebarItem>
             <Link to={'/'} key={uuid4()} style={{ textDecoration: 'none' }}>
               <NavigationItem
                 before={EmailIcon}
                 text={'Contact'} subText={'Mail box'}
               />
             </Link>
-          </SidebarItem>
+          </SidebarItem>*/}
 
           <Separator/>
           <GroupHeading>General</GroupHeading>
-          <Link to={'/'} key={uuid4()} style={{ textDecoration: 'none' }}>
+          <Link to={SettingRoutes.SETTING} key={uuid4()} style={{ textDecoration: 'none' }}>
             <NavigationItem
               before={SettingsIcon}
-              text={'Settings'} subText={'Global settings'}
+              text={'Setting'} subText={'Global settings'}
             />
           </Link>
 
-          <SidebarItem>
+          {/*<SidebarItem>
             <Link to={'/'} key={uuid4()} style={{ textDecoration: 'none' }}>
               <NavigationItem
                 before={ArrowUpIcon}
                 text={'SEO'} subText={'SEO settings'}
               />
             </Link>
-          </SidebarItem>
-
-          <SidebarItem>
-            <Link to={'/'} key={uuid4()} style={{ textDecoration: 'none' }}>
-              <NavigationItem
-                before={CreditCardIcon}
-                text={'Credentials'} subText={'API Credentials'}
-              />
-            </Link>
-          </SidebarItem>
+          </SidebarItem>*/}
 
         </div>
       )}

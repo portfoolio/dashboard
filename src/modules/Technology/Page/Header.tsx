@@ -5,8 +5,8 @@ import LayoutWrapper from 'modules/Core/Component/Layout/Wrapper';
 import LayoutTitle from 'modules/Core/Component/Layout/Title';
 
 import { Route as HomeRoutes } from 'modules/Home/Router/types';
-import { Route as TechnologieRoutes } from 'modules/Technologie/Router/types';
-import HeaderForm from 'modules/Technologie/Component/HeaderForm';
+import { Route as TechnologyRoutes } from 'modules/Technology/Router/types';
+import HeaderForm from 'modules/Technology/Component/HeaderForm';
 
 export default (): ReactElement => {
   return (
@@ -19,7 +19,7 @@ export default (): ReactElement => {
           },
           {
             title: 'Header',
-            route: formatRoute(TechnologieRoutes.HEADER),
+            route: formatRoute(TechnologyRoutes.HEADER),
           },
         ]
       }>

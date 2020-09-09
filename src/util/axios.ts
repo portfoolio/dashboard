@@ -1,5 +1,6 @@
 import axios from 'axios';
 import store from 'store';
+
 import { ActionType } from 'modules/Core/Store/types';
 import { ActionType as AuthActionTypes } from 'modules/Auth/Store/types';
 

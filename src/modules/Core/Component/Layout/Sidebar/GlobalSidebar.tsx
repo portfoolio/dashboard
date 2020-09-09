@@ -1,86 +1,66 @@
-import React, { Component } from 'react';
-import { connect } from 'react-redux';
+import React, { ReactElement, useCallback, useState } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
 import { withRouter } from 'react-router-dom';
 import { OpsGenieIcon } from '@atlaskit/logo';
 import Item, { ItemGroup } from '@atlaskit/item';
-import { presetThemes } from '@atlaskit/navigation';
 import GlobalNavigation from '@atlaskit/global-navigation';
 import Avatar, { AvatarItem } from '@atlaskit/avatar';
 import { APP_NAME } from 'config';
 import { logout } from 'modules/Auth/Store/actions';
 
-class GlobalSidebar extends Component<any, any> {
-  state = {
-    isNotificationDrawerOpen: false,
-  };
+export default withRouter((props): ReactElement => {
+  const { auth: { user } }: any = useSelector((state: any) => state);
 
-  render() {
-    return (
-      <div style={{ height: '100%' }}>
-        <GlobalNavigation
-          globalTheme={presetThemes.dark}
-          containerTheme={presetThemes.dark}
-          productIcon={ OpsGenieIcon }
-          onProductClick={() => this.props.history.push('/')}
-          productTooltip={APP_NAME}
-          productLabel={APP_NAME}
-          searchLabel='Search'
-          onSettingsClick={() => this.props.history.push('/')}
-          isNotificationDrawerOpen={this.state.isNotificationDrawerOpen}
-          notificationDrawerWidth='narrow'
-          onNotificationDrawerOpen={() => undefined}
-          notificationDrawerContents={() => (
-            <div>
-              {
-                this.props.user && <AvatarItem
-                  avatar={<Avatar src={this.props.user.avatar} />}
-                  key={this.props.user.email}
-                  primaryText={`${this.props.user.firstName} ${this.props.user.lastName}`}
-                  secondaryText={this.props.user.email}
-                />
-              }
-            </div>
-          )}
-          profileItems={() => (
-            <div>
-              <ItemGroup>
-                <Item onClick={(e: MouseEvent) => {
-                  e.preventDefault();
-                  this.props.logout();
-                }}>
-                  Logout
-                </Item>
-              </ItemGroup>
-            </div>
-          )}
-          profileIconUrl={
-            this.props.user
-              ? this.props.user.avatar
-              : null
-          }
-          profileTooltip={
-            this.props.user
-              ? `${this.props.user.firstName} ${this.props.user.lastName}`
-              : null
-          }
-        />
-      </div>
-    );
-  }
-}
+  const [isNotificationDrawerOpen] = useState(false);
 
-const mapStateToProps = (state: any) => {
-  const { user } = state.auth;
-  return {
-    user,
-    notification: state.core.notification,
-  };
-};
+  const dispatch = useDispatch();
+  const stableDispatch = useCallback(dispatch, []);
 
-const mapDispatchToProps = (dispatch: any): object => {
-  return {
-    logout: () => dispatch(logout()),
-  };
-};
-
-export default connect(mapStateToProps, mapDispatchToProps)(withRouter(GlobalSidebar));
+  return (
+    <div style={{ height: '100%' }}>
+      <GlobalNavigation
+        productIcon={ OpsGenieIcon }
+        onProductClick={() => props.history.push('/')}
+        productTooltip={APP_NAME}
+        productLabel={APP_NAME}
+        searchLabel='Search'
+        onSettingsClick={() => props.history.push('/')}
+        isNotificationDrawerOpen={isNotificationDrawerOpen}
+        notificationDrawerWidth='narrow'
+        onNotificationDrawerOpen={() => undefined}
+        notificationDrawerContents={() => (
+          <div>
+            {
+              user && <AvatarItem
+                avatar={<Avatar src={user.avatar} />}
+                key={user.email}
+                primaryText={`${user.firstName} ${user.lastName}`}
+                secondaryText={user.email}
+              />
+            }
+          </div>
+        )}
+        profileItems={() => (
+          <div>
+            <ItemGroup>
+              <Item onClick={(e: MouseEvent) => {
+                e.preventDefault();
+                stableDispatch(logout());
+              }}>
+                Logout
+              </Item>
+            </ItemGroup>
+          </div>
+        )}
+        profileIconUrl={
+          user
+            ? user.avatar
+            : null
+        }
+        profileTooltip={
+          user ? `${user.firstName} ${user.lastName}` : null
+        }
+      />
+    </div>
+  );
+});

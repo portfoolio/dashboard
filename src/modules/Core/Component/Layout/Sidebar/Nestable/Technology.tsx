@@ -8,14 +8,14 @@ import CodeIcon from '@atlaskit/icon/glyph/code';
 import { Item } from '@atlaskit/navigation-next';
 
 import { NestableWrapper } from 'modules/Core/Component/Layout/Sidebar/Nestable/Wrapper';
-import { Route as TechnologysRoute } from 'modules/Technology/Router/types';
+import { Route as TechnologyRoute } from 'modules/Technology/Router/types';
 
 const nestedLevels = [
   {
     id: 'technologies',
     items: [
       {
-        text: 'Technologys',
+        text: 'Technology',
         before: CodeIcon,
         after: ArrowRightIcon,
         goTo: 1,
@@ -28,20 +28,20 @@ const nestedLevels = [
     id: 'technologies-2',
     items: [
       { text: 'Go Back', before: ArrowLeftIcon, goTo: 0 },
-      { text: 'Header', before: EditorHorizontalRuleIcon, goTo: TechnologysRoute.HEADER },
-      { text: 'Items', before: AddItemIcon, goTo: TechnologysRoute.LIST },
+      { text: 'Header', before: EditorHorizontalRuleIcon, goTo: TechnologyRoute.HEADER },
+      { text: 'Items', before: AddItemIcon, goTo: TechnologyRoute.LIST },
     ],
   },
 ];
 
 const expandRoutes = [
-  TechnologysRoute.LIST,
-  TechnologysRoute.CREATE,
-  TechnologysRoute.EDIT,
-  TechnologysRoute.HEADER,
+  TechnologyRoute.LIST,
+  TechnologyRoute.CREATE,
+  TechnologyRoute.EDIT,
+  TechnologyRoute.HEADER,
 ];
 
-export const NestableTechnologys = withRouter(({ location, history }: any): ReactElement => {
+export const NestableTechnology = withRouter(({ location, history }: any): ReactElement => {
   const shouldExpand = expandRoutes.includes(location.pathname)
   let [activeLevel, setActiveLevel] = useState(shouldExpand ? 1 : 0);
 

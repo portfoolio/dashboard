@@ -1,6 +1,6 @@
 export enum Route {
-  LIST = '/technologie',
-  EDIT = '/technologie/:id',
-  CREATE = '/technologie/create',
-  HEADER = '/technologie/header/edit',
+  LIST = '/technology',
+  EDIT = '/technology/:id',
+  CREATE = '/technology/create',
+  HEADER = '/technology/header/edit',
 }

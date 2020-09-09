@@ -1,5 +1,5 @@
-import axios from 'util/axios';
 import store from 'store';
+import axios from 'util/axios';
 
 interface RequestQuery {
   [key: string]: string;
@@ -57,7 +57,7 @@ export default class Service {
 
   static getRoute(endpoint: Endpoint, params: RequestQuery) {
     if (params) {
-      for (let param in params) {
+      for (const param in params) {
         if (!endpoint.path.includes(param)) {
           throw new Error(`Route parameter: ${param} is not allowed in route path: ${endpoint.path}`);
         }
@@ -72,8 +72,8 @@ export default class Service {
   }
 
   static querify(params: RequestQuery = {}) {
-    let str = [];
-    for (let p in params) {
+    const str = [];
+    for (const p in params) {
       if (params.hasOwnProperty(p)) {
         str.push(`${encodeURIComponent(p)}=${encodeURIComponent(params[p])}`);
       }

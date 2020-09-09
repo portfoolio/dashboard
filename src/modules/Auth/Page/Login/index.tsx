@@ -1,55 +1,30 @@
-import React, { Component } from 'react';
-import { connect } from 'react-redux';
+import React, { useCallback } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
 import { Redirect } from 'react-router-dom';
 
 import LayoutWrapper from 'modules/Core/Component/Layout/Wrapper';
 import LayoutTitle from 'modules/Core/Component/Layout/Title';
 import AuthComponentLogin from 'modules/Auth/Component/Login';
 import { login } from 'modules/Auth/Store/actions';
-import { GlobalState } from 'modules/Core/types';
 
-class Login extends Component<any, any> {
-  constructor(props: any) {
-    super(props);
-    this.onLoginSubmitted = this.onLoginSubmitted.bind(this);
+export default () => {
+  const {
+    auth: { isAuthenticated },
+  }: any = useSelector((state: any) => state);
+
+  const dispatch = useDispatch();
+  const stableDispatch = useCallback(dispatch, []);
+
+  if (isAuthenticated) {
+    return <Redirect to={'/'} />;
   }
 
-  onLoginSubmitted(data: {
-    email: string,
-    password: string,
-  }) {
-    this.props.login(data);
-  }
-
-  render() {
-    if (this.props.isAuthenticated) {
-      return <Redirect to={'/'} />;
-    }
-
-    return (
-      <LayoutWrapper medium={4}>
-        <LayoutTitle>Login</LayoutTitle>
-        <section>
-          <AuthComponentLogin onSubmit={this.onLoginSubmitted} />
-        </section>
-      </LayoutWrapper>
-    );
-  }
+  return (
+    <LayoutWrapper medium={4}>
+      <LayoutTitle>Login</LayoutTitle>
+      <section>
+        <AuthComponentLogin onSubmit={(data: any) => stableDispatch(login(data))} />
+      </section>
+    </LayoutWrapper>
+  );
 }
-
-const mapStateToProps = (state: GlobalState): {
-  isAuthenticated: boolean,
-} => {
-  const { isAuthenticated } = state.auth;
-  return {
-    isAuthenticated,
-  };
-};
-
-const mapDispatchToProps = (dispatch: any): object => {
-  return {
-    login: (user: any) => dispatch(login(user)),
-  };
-};
-
-export default connect(mapStateToProps, mapDispatchToProps)(Login);

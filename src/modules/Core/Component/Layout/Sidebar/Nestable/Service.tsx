@@ -19,6 +19,7 @@ const nestedLevels = [
         before: BoardIcon,
         after: ArrowRightIcon,
         goTo: 1,
+        subText: 'Services section',
       },
     ],
   },
@@ -51,7 +52,11 @@ export const NestableService = withRouter(({ location, history }: any): ReactEle
     <NestableWrapper sectionProps={sectionProps}>
       {
         items.map(({ goTo, ...itemProps }: any) => (
-          <div className={goTo} key={itemProps.text} style={{ paddingLeft: [0, 1].includes(goTo) ? '0px' : '12px' }}>
+          <div
+            className={goTo}
+            key={itemProps.text}
+            style={{ paddingLeft: [0, 1].includes(goTo) ? '0px' : '12px' }}
+          >
             <Item
               isSelected={goTo === location.pathname}
               key={itemProps.text}

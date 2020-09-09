@@ -4,44 +4,44 @@ import ArrowLeftIcon from '@atlaskit/icon/glyph/arrow-left';
 import ArrowRightIcon from '@atlaskit/icon/glyph/arrow-right';
 import AddItemIcon from '@atlaskit/icon/glyph/add-item';
 import EditorHorizontalRuleIcon from '@atlaskit/icon/glyph/editor/horizontal-rule';
-import CommentIcon from '@atlaskit/icon/glyph/comment';
+import EditorBoldIcon from '@atlaskit/icon/glyph/editor/bold';
 import { Item } from '@atlaskit/navigation-next';
 
 import { NestableWrapper } from 'modules/Core/Component/Layout/Sidebar/Nestable/Wrapper';
-import { Route as TestimonialRoute } from 'modules/Testimonial/Router/types';
+import { Route as BlogRoute } from 'modules/Blog/Router/types';
 
 const nestedLevels = [
   {
-    id: 'testimonial',
+    id: 'blog',
     items: [
       {
-        text: 'Testimonial',
-        before: CommentIcon,
+        text: 'Blog',
+        before: EditorBoldIcon,
         after: ArrowRightIcon,
         goTo: 1,
-        subText: 'Testimonial section',
+        subText: 'Blog section',
       },
     ],
   },
   {
-    parentId: 'testimonial',
-    id: 'testimonial-2',
+    parentId: 'blog',
+    id: 'blog-2',
     items: [
       { text: 'Go Back', before: ArrowLeftIcon, goTo: 0 },
-      { text: 'Header', before: EditorHorizontalRuleIcon, goTo: TestimonialRoute.HEADER },
-      { text: 'Items', before: AddItemIcon, goTo: TestimonialRoute.LIST },
+      { text: 'Header', before: EditorHorizontalRuleIcon, goTo: BlogRoute.HEADER },
+      { text: 'Items', before: AddItemIcon, goTo: BlogRoute.LIST },
     ],
   },
 ];
 
 const expandRoutes = [
-  TestimonialRoute.LIST,
-  TestimonialRoute.CREATE,
-  TestimonialRoute.EDIT,
-  TestimonialRoute.HEADER,
+  BlogRoute.LIST,
+  BlogRoute.CREATE,
+  BlogRoute.EDIT,
+  BlogRoute.HEADER,
 ];
 
-export const NestableTestimonial = withRouter(({ location, history }: any): ReactElement => {
+export const NestableBlog = withRouter(({ location, history }: any): ReactElement => {
   const shouldExpand = expandRoutes.includes(location.pathname)
   let [activeLevel, setActiveLevel] = useState(shouldExpand ? 1 : 0);
 
