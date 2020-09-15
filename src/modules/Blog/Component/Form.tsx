@@ -47,7 +47,7 @@ export default withRouter(({ history, match }: any): ReactElement => {
     }
   }, [stableDispatch, match.params.id]);
 
-  const parseEditorContent = match.params.id.length > 0 && blog.content.length > 1;
+  const parseEditorContent = match.params.id && match.params.id.length > 0 && blog.content.length > 1;
   const editorDefaultValue = parseEditorContent ? JSON.parse(blog.content) : [];
   const editorProps: any = parseEditorContent ? { defaultValue: editorDefaultValue } : {};
 
